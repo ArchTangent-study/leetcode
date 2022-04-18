@@ -1,4 +1,4 @@
-# Invert Binary Tree
+# Invert Binary Tree (LC226)
 Difficulty: **Easy**
 
 ## Problem
@@ -23,8 +23,5 @@ Output: []
 ```
 ## Results (Python 3)
 
-### Time
-32 ms, faster than 87.09% of submissions.
-
-### Memory
-13.9 MB, less than 59.69% of submissions.
+### Method 1
+32 ms, 13.9 MB (87.09%, 58.69%)
