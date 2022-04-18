@@ -2,11 +2,11 @@
 My approach to Leetcode and Blind problems, in Python.
 
 ## Structure
-Problems are sorted based on *category* (Trees, Stack, Linked List, etc.) and *difficulty* (easy, medium, hard), and placed into their own folders.
+Problems are sorted based on category (Trees, Stack, Linked List, etc.), and placed into their own folders.
 
 Each problem folder should contain:
-- a `test.py` file to ensure that the expected output is returned for given input.
-- a `readme.md` file describing the problem.
+- a `readme.md` file describing the problem, difficulty (easy, medium, hard), and my results (time and space complexity rankings) from Leetcode, if any.
+- a `###-name-of-problem.py` file, where `###` is the Leetcode problem number.  This is my solution as submitted to Leetcode.
 
 ## Resources
-[neetcode](https://neetcode.io/) is a fantastic source of information on how to solve these problems.
+[Neetcode](https://neetcode.io/) is a fantastic source of information on how to solve these problems.
