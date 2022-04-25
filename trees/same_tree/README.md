@@ -57,6 +57,24 @@ This solution wound up being even *slower* than method 1.  Perhaps it would be f
 
 There has to be a better way:  it would be ideal to check the `nth` node of each tree *as they are encountered*.  This would require far less memory, and exit as soon as the first unmatched pair occurs.
 
+### Method 3: Paired Recursion
+
+Well, turns out there was a better way!  It was a struggle to find the right way to compare `p` and `q` one node at a time, without using two stacks (which would have worked, but been far less elegant and efficient).  All that's needed is to...call the `isSameTree()` function recursively.
+
+One submission failed due to a runtime error.  The cause: an incomplete early exit. This:
+```
+        if p is None:
+            return q is None
+```
+instead of this:
+```
+        if p is None:
+            return q is None
+        if q is None:
+            return p is None
+```
+The first example doesn't account for the case where `p` is a valid node while `q` is not.  Despite the minor setback, this was by far the best (and most succinct) of my three solutions.
+
 ## Results (Python 3)
 
 ### Method 1
@@ -64,3 +82,6 @@ There has to be a better way:  it would be ideal to check the `nth` node of each
 
 ### Method 2
 43 ms, 14.0 MB (47.31%, 31.58%)
+
+### Method 3
+26 ms, 13.9 MB (96.15%, 77.02%)
