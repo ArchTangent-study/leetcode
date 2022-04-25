@@ -21,6 +21,13 @@ Example 3:
 Input: root = []
 Output: []
 ```
+## Procedure
+
+My plan of action was as follows:
+1. Identify the approach.  For this case, you're traversing each node of a tree, so *recursion* is a useful method.
+2. Invert the children (subnodes) of a node by swapping their children (swapping the pointers or references to the children).
+3. Apply the subnode inversion recursively throughout the tree.
+
 ## Results (Python 3)
 
 ### Method 1

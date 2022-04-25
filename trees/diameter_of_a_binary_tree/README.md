@@ -45,7 +45,8 @@ if (node.left OR node.right) { depth = 1 } else { depth = 0 }
 - At each Node, update the Diameter (D) according to equation above.
 - Final diameter is the highest found while traversing the entire tree.
 
-I also considered a method that sought the "closest common ancestor", but couldn't get a grip on the solution.  Perhaps for a later time.
+## Other Ideas
+I also considered a method that sought the "closest common ancestor", but couldn't get to a well-forumlated solution.  Perhaps for a later time.
 
 ## Results (Python 3)
 
