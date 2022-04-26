@@ -37,10 +37,25 @@ Constraints:
 
 ## Procedure
 
+### Method 1: Collect Nodes and Compare Slices
+
+This problem builds upon things learned from the **Same Tree** LeetCode exercise ([LC100](https://leetcode.com/problems/same-tree)) [[My Solution](https://github.com/ArchTangent-study/leetcode/tree/main/trees/same_tree)].
+
 The plan of action:
-1.
+1. Traverse the `root` and `subRoot` trees using *recursion*, collecting their values into respective lists.  Include any `null` children.
+2. Compare moving slice "*windows*" of the `root` node list vs the entirety of the `subRoot` node list. The size of each slice is the length of the `subRoot` node list.
+3. If a *window* is equal to the `subRoot` node list, return `True` (early exit).  
+4. If no *windows* match, return `False`.
+
+*Note*:  Python allows for out-of-bounds (OOB) slice indexes:  the slice will simply be truncated so that all values will be in-bounds.  An example you can try in the terminal:
+```
+>>> a = [1,2,3,4,5]
+>>> a[0:10]
+[1, 2, 3, 4, 5]
+```
+This can be used to solve the problem without fear of going OOB when slicing.
 
 ## Results (Python 3)
 
 ### Method 1
-XX ms, XX.X MB (XX.XX%, XX.XX%)
+117 ms, 15.1 MB (91.78%, 64.85%)
