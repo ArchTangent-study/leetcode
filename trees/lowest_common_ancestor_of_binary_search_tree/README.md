@@ -49,10 +49,18 @@ Constraints:
 
 ## Procedure
 
-The plan of action:
-1.
+Recursively choose the left or right node path based on the relation between `Node.val` and the values of `p` and `q`.  `Node` is the LCA if `p` and `q` are to either side of the node.
+
+Identify three different scenarios:
+1. If both `p` and `q` are less than `Node`:  traverse the left node and repeat
+2. If both `p` and `q` are greater than `Node`:  traverse the right node and repeat
+3. Otherwise, `Node` is the LCA.
 
 ## Results (Python 3)
 
 ### Method 1
-XX ms, XX.X MB (XX.XX%, XX.XX%)
+178 ms, 19.0 MB (5.04%, 23.71%)
+
+## Lessons Learned
+
+- **Read the instructions carefully**:  when I first tried this problem, I approached it like I did with other binary trees, failing to notice that this was a Binary *Search* Tree, allowing for a much simpler solution.

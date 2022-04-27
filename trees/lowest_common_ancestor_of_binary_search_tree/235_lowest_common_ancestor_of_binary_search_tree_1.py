@@ -5,4 +5,19 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution: 
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        # Case 1: p, q < root - traverse only left side
+        if p.val < root.val and q.val < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        # Case 2: p, q > root - traverse only right side
+        if p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        # Case 3: p <= root <= q OR q <= root <= p - root must be the LCA
+        return root
