@@ -1,4 +1,4 @@
-# Same Tree (LC100)
+# Same Tree ([LC100](https://leetcode.com/problems/same-tree/))
 Difficulty: **Easy**
 
 ## Problem
@@ -6,30 +6,6 @@ Given the roots of two binary trees `p` and `q`, write a function to check if th
 
 Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
-Example 1:
-```
-    1           1
- 2     3     2     3     
-
-Input: p = [1,2,3], q = [1,2,3]
-Output: true
-```
-Example 2:
-```
-    1       1
- 2             2     
-
-Input: p = [1,2], q = [1,null,2]
-Output: false
-```
-Example 3:
-```
-    1           1
- 2     3     2     3    
-
-Input: p = [1,2,1], q = [1,1,2]
-Output: false
-```
 ## Procedure
 
 ### Method 1: Simple List Comparison
@@ -77,11 +53,8 @@ The first example doesn't account for the case where `p` is a valid node while `
 
 ## Results (Python 3)
 
-### Method 1
-31 ms, 14.0 MB (87.21%, 31.58%)
+**Method 1**:  31 ms, 14.0 MB (87.21%, 31.58%)
 
-### Method 2
-43 ms, 14.0 MB (47.31%, 31.58%)
+**Method 2**:  43 ms, 14.0 MB (47.31%, 31.58%)
 
-### Method 3
-26 ms, 13.9 MB (96.15%, 77.02%)
+**Method 3**:  26 ms, 13.9 MB (96.15%, 77.02%)
