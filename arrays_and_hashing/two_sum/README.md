@@ -1,4 +1,4 @@
-# Two Sum ([LC001](https://leetcode.com/problems/two-sum/)
+# Two Sum ([LC001](https://leetcode.com/problems/two-sum/))
 Difficulty: **Easy**
 
 ## Problem
