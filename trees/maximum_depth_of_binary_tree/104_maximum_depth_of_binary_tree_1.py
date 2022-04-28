@@ -20,3 +20,4 @@ class Solution:
             d.append(lv)
             self.nextDepth(root.left, d, lv)
             self.nextDepth(root.right, d, lv)
+            
