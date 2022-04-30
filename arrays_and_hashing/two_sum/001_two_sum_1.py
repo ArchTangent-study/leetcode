@@ -11,5 +11,5 @@ class Solution:
                 else:
                     index_2 += 1
 
-        # Should never see this as there is a guaranteed solution
+        # Error condition - shouldn't see as this as there is a guaranteed solution
         return [-1, -1]

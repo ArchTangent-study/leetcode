@@ -40,6 +40,24 @@ nums    [3,5,7,2,5,1]
 ```
 Thoughts:  the solution isn't particularly efficient or elegant, but it works.  Something to build upon in attempt #2.
 
+### Method 2: Sorted List (Low-to-High)
+
+The structure is similar to method 1, with some key changes:
+1. A new list, `sorted_nums`, is created from `nums`, sorted from low to high
+2. Perform searching algorithm on the sorted list, getting the *numbers* that sum up to `target`.
+3. An early exit condition is introduced: if `target > sum(lowest_val, highest_val)`, there's no way that `target` can be within the range -> move to the next range. This works particularly well with ranges that contain negative numbers.
+4. Since the algorithm (a) returns *numbers*, and (b) operates on a sorted list, the *indexes* still need to be found in the *original* list.
+5. Find the indexes of the numbers in the *original* `nums` list by returning the indexes from the left *and* right sides.  This is necessary because if both numbers are the same (e.g. `3` and `3`), the return values will have the same index (the *wrong* answer).
+
+Thoughts: this was *significantly* faster (almost 25x) than method 1, and demonstrates that doing some work up front (sorting) can wind up *saving* time on later calculations.  Still, I feel there's a better way.
+
+### Method 2: Sorted List (High-to-Low)
+
 ## Results (Python 3)
 
 **Method 1**:  5491 ms, 15.0 MB (14.03%, 76.86%)
+
+**Method 2**:  223 ms, 15.0 MB (36.98%, 76.80%)
+
+### Lessons learned
+Account for *all* inputs, including negative values.  An earlier attempt at a solution (sorting from high to low) was erroneous because it didn't account for them.
