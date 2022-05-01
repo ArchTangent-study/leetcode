@@ -21,9 +21,9 @@ Edge Cases / Caveats:
 - `0` always returns `0` bits.
 - the number of bits in maximum *unsigned* integers may vary by language.
 
-Approaches:
+Approach 1: Bit Shifting
 
-**Bit Shifting**: while `n` is greater than `0`:
+While `n` is greater than `0`:
 - check if the least significant bit (LSB) is `1`.  If so, increment `count`.
 - shift bits to the right.
 
@@ -41,8 +41,34 @@ A key idea is to use `n & 1` to isolate the least significant bit.
 
 ### Method 2: Follow-Up
 
-*(To be continued)*
+This method can be much faster for larger numbers, where the `1` bits are distributed toward the most significant bit (MSB), e.g. `1100000` vice `00000011`.
+
+Instead of shifting bits in `n`, multiply `n` by `n-1`.  It's easier to just show what's happening - here's an example with an 8-bit integer:
+
+```
+n: u8 = 0b10000001
+
+Step 1
+10000001    n
+10000000    n-1
+10000000    n & (n-1)
+       1    count
+
+Step 2
+10000000    n
+01111111    n-1
+00000000    n & (n-1)n&(n-1)
+       2    count
+
+Since n is now 0, return count, which is 2
+```
+
+In the above case, only two passes are required instead of 8.
 
 ## Results (Python 3)
 
 **Method 1**:  51 ms, 13.8 MB (30.55%, 95.25%)
+
+## Lessons Learned
+
+In Python, it can be slightly faster to use `n &= n-1` than to use `n = n & (n-1)`.
