@@ -1,7 +1,7 @@
 # type: ignore
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        ans = []
+        answer = []
         for i in range(0, n+1):
             count = 0
             # Inner copy of i for use in the loop
@@ -10,6 +10,6 @@ class Solution:
                 count += inner_i & 1 
                 inner_i >>= 1
                 
-            ans.append(count)
+            answer.append(count)
                     
-        return ans
+        return answer

@@ -29,24 +29,39 @@ Approach 1: Iterative Bit Shifting (see below)
 
 There's a clear pattern when looking at the bitwise representation of `0` to `16`:
 ```
-00000   0
-00001   1
-00010   2
-00011   3
-00100   4
-00101   5
-00110   6
-00111   7
-01000   8
-01001   9
-01010   10
-01011   11
-01100   12
-01101   13
-01110   14
-01111   15
-10000   16
+4-7 vs 0-3              8-15 vs 0-7
+ bits    n  ct           bits    n  ct
+000 00   0   0          00 000   0   0
+000 01   1   1          00 001   1   1
+000 10   2   1          00 010   2   1
+000 11   3   2          00 011   3   2
+                        
+001 00   4   1          00 100   4   1
+001 01   5   2          00 101   5   2
+001 10   6   2          00 110   6   2
+001 11   7   3          00 111   7   3
+
+                        01 000   8   1 
+                        01 001   9   2
+                        01 010  10   2
+                        01 011  11   3
+                        01 100  12   2
+                        01 101  13   3
+                        01 110  14   3
+                        01 111  15   4
 ```
+For `4-7` vs `0-3`:
+- The representation of `4` is the same as that of `0`, with a `1` at bit index `2`
+- The representation of `5` is the same as that of `1`, with a `1` at bit index `2`
+- The representation of `6` is the same as that of `2`, with a `1` at bit index `2`
+- The representation of `7` is the same as that of `3`, with a `1` at bit index `2`
+
+For `8-15` vs `0-7`:
+- The representation of `8` is the same as that of `0`, with a `1` at bit index `3`
+- The representation of `9` is the same as that of `1`, with a `1` at bit index `3`
+- The representation of `10` is the same as that of `2`, with a `1` at bit index `3`
+- The representation of `11` is the same as that of `3`, with a `1` at bit index `3`
+... and so on.
 
 ## Procedure
 
@@ -58,6 +73,38 @@ This is effectively the same problem, but done for a range of numbers instead of
 
 Time complexity: `O(n log(n))`
 
+### Method 2: Dynamic Programming Version 1 (Follow-Up)
+
+Using the pattern in the [Visualization](#visualization) section above:
+
+- The results for `4-7` can *reuse* the results of `0-3`, adding `1` to the final count.
+- The results for `8-15` can *reuse* the results of `0-7`, adding `1` to the final count.
+- The results for `16-31` can *reuse* the results of `0-15`, adding `1` to the final count.
+... and so on.
+
+This can be turned into an algorithm:
+1. Calculate `bit_count` for `i = [0..3]` using [Method 1](#method-1-iterative-bit-shifting).
+2. For `i = [4..7]`, `bit_count[i]` == `bit_count[i-4]` (shift 4 indexes back, add `1`).
+3. For `i = [8..15]`, `bit_count[i]` == `bit_count[i-8]` (shift 8 indexes back, add `1`).
+4. For `i = [16..31]`, `bit_count[i]` == `bit_count[i-16]` (shift 16 indexes back, add `1`).
+
+Time complexity: `O(n)`
+
+**Thoughts**: This solution is clearly not ideal, as there's a pattern (*base 2*) that can be used to coalesce the many `for` loops in the solution into a single one.
+
+### Method 3: Dynamic Programming Version 2 (Follow-Up)
+
+(TODO)
+
 ## Results (Python 3)
 
 **Method 1**:  198 ms, 20.7 MB (23.22%, 80.59%)
+
+**Method 2**:  142 ms, 21.0 MB (43.14%, 5.39%)
+
+**Method 3**:  XXX ms, XX MB (XX%, XX%)
+
+## Lessons Learned
+1. Draw it out:  binary problems have patterns that can be seen easily if the bitwise representations are listed.
+2. Check your constraints: one of my earlier solutions failed because it didn't account for `n <= 100,000`.
+3. Refine the process: look for patterns in your solutions to streamline the answer into a more flexible and elegant algorithm.  This one had a very obvious pattern using *base 2* (`2^0, 2^1, 2^2, ...`).
