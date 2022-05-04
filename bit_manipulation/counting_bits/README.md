@@ -29,27 +29,30 @@ Approach 1: Iterative Bit Shifting (see below)
 
 There's a clear pattern when looking at the bitwise representation of `0` to `16`:
 ```
-4-7 vs 0-3              8-15 vs 0-7
- bits    n  ct           bits    n  ct
-000 00   0   0          00 000   0   0
-000 01   1   1          00 001   1   1
-000 10   2   1          00 010   2   1
-000 11   3   2          00 011   3   2
-                        
-001 00   4   1          00 100   4   1
-001 01   5   2          00 101   5   2
-001 10   6   2          00 110   6   2
-001 11   7   3          00 111   7   3
-
-                        01 000   8   1 
-                        01 001   9   2
-                        01 010  10   2
-                        01 011  11   3
-                        01 100  12   2
-                        01 101  13   3
-                        01 110  14   3
-                        01 111  15   4
+  2-3 vs 0-1             4-7 vs 0-3              8-15 vs 0-7
+ bits    n  ct          bits    n  ct           bits    n  ct
+0000 0   0   0          000 00   0   0          00 000   0   0
+0000 1   1   1          000 01   1   1          00 001   1   1
+                        000 10   2   1          00 010   2   1
+0001 0   2   1          000 11   3   2          00 011   3   2
+0001 1   3   2                                  00 100   4   1
+                        001 00   4   1          00 101   5   2
+                        001 01   5   2          00 110   6   2
+                        001 10   6   2          00 111   7   3
+                        001 11   7   3          
+                                                01 000   8   1 
+                                                01 001   9   2
+                                                01 010  10   2
+                                                01 011  11   3
+                                                01 100  12   2
+                                                01 101  13   3
+                                                01 110  14   3
+                                                01 111  15   4
 ```
+For `2-3` vs `0-1`:
+- The representation of `2` is the same as that of `0`, with a `1` at bit index `1`
+- The representation of `3` is the same as that of `1`, with a `1` at bit index `1`
+
 For `4-7` vs `0-3`:
 - The representation of `4` is the same as that of `0`, with a `1` at bit index `2`
 - The representation of `5` is the same as that of `1`, with a `1` at bit index `2`
@@ -61,6 +64,7 @@ For `8-15` vs `0-7`:
 - The representation of `9` is the same as that of `1`, with a `1` at bit index `3`
 - The representation of `10` is the same as that of `2`, with a `1` at bit index `3`
 - The representation of `11` is the same as that of `3`, with a `1` at bit index `3`
+
 ... and so on.
 
 ## Procedure
@@ -90,11 +94,48 @@ This can be turned into an algorithm:
 
 Time complexity: `O(n)`
 
-**Thoughts**: This solution is clearly not ideal, as there's a pattern (*base 2*) that can be used to coalesce the many `for` loops in the solution into a single one.
+**Thoughts**: This solution is clearly not ideal, as there's a pattern (*base 2*) that can be used to coalesce the many `for` loops in the solution into a single one.  See **method 3** for a better way.
 
 ### Method 3: Dynamic Programming Version 2 (Follow-Up)
 
-(TODO)
+Another look at the pattern:
+- for `n = [1..1]`, the count for `n` is `1 + answer[n-1]`
+- for `n = [2..3]`, the count for `n` is `1 + answer[n-2]`
+- for `n = [4..7]`, the count for `n` is `1 + answer[n-4]`
+- for `n = [8..15]`, the count for `n` is `1 + answer[n-8]`
+- for `n = [16..31]`, the count for `n` is `1 + answer[n-16]`
+
+... and so on.
+
+Key idea: for every number `n`, there exists:
+- a `count_index` equal to n (the index in the `count` return value)
+- a `index_shift` equal to 2 * log2(n)
+- a `bit_count` equal to `answer[n - index_shift] + 1`
+
+The simplest way I found to determine the `index_shift` is to set it to a baseline level of `1`, and if `n > index_shift`, then double `index_shift`.
+
+Example where `n = 5`:
+
+```python
+nums   = [0, 1, 2, 3, 4]    # numbers n tracked so far, from 0 to 4
+answer = [0, 1, 1, 2, 1]    # count of bits for each n so far, from 0 to 4
+
+index_shift = 2*log2(5) = 4
+
+So, when n = 5:
+    count_5 = answer[5 - 4] + 1
+            = answer[1] + 1
+            = 1 + 1
+            = 2
+
+nums   = [0, 1, 2, 3, 4, 5] 
+answer = [0, 1, 1, 2, 1, 2] <- add count of 2 to the answer
+```
+Other notes:
+- since `n` is known in advance, you can preallocate the `answer` array to `[0]*n`
+- for any value of `n`, the count for `n` is stored in `answer[n]`
+
+Thoughts: this was about **40% faster** than method 2, while being more concise.
 
 ## Results (Python 3)
 
@@ -102,9 +143,10 @@ Time complexity: `O(n)`
 
 **Method 2**:  142 ms, 21.0 MB (43.14%, 5.39%)
 
-**Method 3**:  XXX ms, XX MB (XX%, XX%)
+**Method 3**:  102 ms, 20.9 MB (72.13%, 31.30%)
 
 ## Lessons Learned
 1. Draw it out:  binary problems have patterns that can be seen easily if the bitwise representations are listed.
-2. Check your constraints: one of my earlier solutions failed because it didn't account for `n <= 100,000`.
-3. Refine the process: look for patterns in your solutions to streamline the answer into a more flexible and elegant algorithm.  This one had a very obvious pattern using *base 2* (`2^0, 2^1, 2^2, ...`).
+2. Use tables: whip up quick tables of inputs, outputs, and variable values at particular steps of the program.
+3. Check your constraints: one of my earlier solutions failed because it didn't account for `n <= 100,000`.
+4. Refine the process: look for patterns in your solutions to streamline the answer into a more flexible and elegant algorithm.  This one had a very obvious pattern using *base 2* (`2^0, 2^1, 2^2, ...`).
