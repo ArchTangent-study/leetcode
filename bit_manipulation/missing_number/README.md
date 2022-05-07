@@ -32,7 +32,7 @@ Approach:
 
 ### Method 2: Sorted List
 
-This is **23x** faster than method 1.
+This is **~23x** faster than method 1.
 
 Key Ideas:
 - Sorting and uniqueness means that `nums[i] = nums[i-1] + 1` for all but the case of the missing number.
@@ -46,8 +46,24 @@ Approach:
     - if `n != expected`, return `expected`
 4. If all `n` in `nums` are traversed without returning, return `expected`, the length of the list.
 
+### Method 3: Arithmetic Series
+
+This is **~20x** faster than method 1.
+
+Key Ideas:
+- The *arithmetic series* can be used for a simple and fast solution
+- Since there's only one missing value and all values are unique, the missing number is simply the sum of the arithmetic series from `1-n`, minus the sum of the numbers in `nums`.
+
+Approach:
+1. Set `n` to length of `nums`
+2. Calculate sum of arithmetic series from `1-n`: `arithmetic_sum`
+3. Calculate sum of values in `nums`: `sum_of_list`
+4. Return `arithmetic_sum` - `sum_of_list`
+
 ## Results (Python 3)
 
 **Method 1**:  3762 ms, 15.2 MB (6.38%, 35.71%)
 
 **Method 2**:  163 ms, 15.2 MB (65.94%, 78.83%)
+
+**Method 3**:  185 ms, 15.1 MB (53.28%, 78.83%)
