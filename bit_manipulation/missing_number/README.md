@@ -15,8 +15,13 @@ Follow up: Could you implement a solution using only `O(1)` extra space complexi
 
 ## Procedure
 
-### Method 1
+### Method 1: Simple Iteration
+
+Approach:
+1. Set `n = len(nums)`
+2. Go over every `i` in `n`
+3. If `i` is not in `nums`, return `i`
 
 ## Results (Python 3)
 
-**Method 1**:  XX ms, XX MB (XX%, XX%)
+**Method 1**:  3762 ms, 15.2 MB (6.38%, 35.71%)

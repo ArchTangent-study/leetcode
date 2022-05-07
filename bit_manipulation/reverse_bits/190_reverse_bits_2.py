@@ -6,6 +6,7 @@ class Solution:
         # Gather bits from right of n, assign to left of output
         for i in range(32):
             ith_bit = n >> i & 1
+            # Note the 31 rather than 32
             output |= ith_bit << (31 - i)
             
         return output
