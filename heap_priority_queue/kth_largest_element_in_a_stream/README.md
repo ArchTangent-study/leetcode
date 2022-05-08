@@ -21,6 +21,7 @@ Constraints:
 
 Edge Cases / Pitfalls:
 - Equal numbers:  be sure to handle cases where an added number is equal to one already in the list.
+- Keeping vals: is it necessary to store all incoming values from the stream? Answer: *no*.
 
 Approach 1: Repeated Sorting
 - Use *sorting* at initialization to get the starting order of `nums` from low to high
@@ -29,14 +30,10 @@ Approach 1: Repeated Sorting
 
 This approach is simpler to implement, but requires a quicksort every time a number is added.
 
-Approach 2: Index Windows
-- Use *sorting* at initialization to get the starting order of `nums` from low to high
-- Track the *index* of the `kth` highest value: `kth_index`
-- Track the *index* of the highest value: `high_index`
-- Adjust one or more of above indexes as numbers are added, based on relation to numbers at `nums[kth_index]` and `nums[highest_index]`
-- Use indexing at `kth_index` to return the `kth` highest index
+Approach 2: Binary Heap
+- Use a *binary heap*, which is well-suited to these problems.  For Python, this requires `heapq` from the standard library [LINK](https://docs.python.org/3/library/heapq.html).
 
-This approach is tougher to implement, but only requires a single quicksort at initialization.
+This approach is simple and efficient if using Python.
 
 ## Procedure
 
@@ -49,6 +46,38 @@ Key Steps:
 
 Thoughts: as expected, this method isn't particularly fast, but it *is* simple and easy to implement.
 
+### Method 2: Binary Heap
+
+Use a binary heap, keeping only the largest `k` values from the stream.
+
+This is **~9x** faster than method 1.
+
+*Note*: Python's `heapq` uses a *min heap*.  
+
+Key Steps:
+1. On initialization, use `heapq.heapify()` to convert `nums` into a binary heap
+2. Keep only the top `k` values after initialization (remove smallest via `heapq.heappop()`)
+3. On `add(val)`, use `heapq.heappush()` to add `val` to binary heap
+4. Keep only the top `k` values after adding a value (remove smallest via `heapq.heappop()`)
+5. Get `kth` largest value by returning lowest value in the heap
+
+Visualization where `k=3`, adding `3`, `5`, then `8`:
+```
+nums    [4, 3, 2, 6, 7, 5, 1]
+init    [1, 3, 2, 6, 7, 5, 4]           after heapify()
+        [5, 6, 7]                       keep only k highest via heappop()
+add 3   [3, 5, 7, 6]                    after heappush(heap, 3)
+        [5, 6, 7]                       keep only k highest via heappop()
+add 5   [5, 5, 7, 6]                    after heappush(heap, 5)
+        [5, 6, 7]                       keep only k highest via heappop()
+add 8   [5, 6, 7, 8]                    after heappush(heap, 8)
+        [6, 8, 7]                       keep only k highest via heappop()
+```
+
+Thoughts: Python's `heapq` makes this quite simple if you are aware of it.
+
 ## Results (Python 3)
 
 **Method 1**:  1185 ms, 18.3 MB (13.35%, 13.35%)
+
+**Method 2**:  126 ms,  18.1 MB (64.25%, 88.55%)
