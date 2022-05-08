@@ -20,6 +20,8 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Pitfalls:
+- Empty list: `nums` can be empty
+- `nums` length less than `k`: in this case, all values added will be among `kth` largest
 - Equal numbers:  be sure to handle cases where an added number is equal to one already in the list.
 - Keeping vals: is it necessary to store all incoming values from the stream? Answer: *no*.
 
@@ -76,8 +78,28 @@ add 8   [5, 6, 7, 8]                    after heappush(heap, 8)
 
 Thoughts: Python's `heapq` makes this quite simple if you are aware of it.
 
+### Method 3: Reverse Sorted List
+
+Use a simple Python `list` that hold `k` values, sorted from lowest to highest for better performance when `pop()`ing the list.
+
+This is **~2.5x** faster than method 1.
+
+Key Steps:
+1. sort `nums` on initialization
+2. Keep only the top `k` values after initialization (remove all `length(nums) - k` smallest values from `nums`)
+3. On `add(val)`:
+    1. add value and sort if `len(nums) < k` *or* `val`len(nums) , k`
+    2. do *not* add `val` if it is less than the smallest value in `nums`
+    3. return the smallest value in `nums`
+
 ## Results (Python 3)
 
 **Method 1**:  1185 ms, 18.3 MB (13.35%, 13.35%)
 
-**Method 2**:  126 ms,  18.1 MB (64.25%, 88.55%)
+**Method 2**:  126 ms, 18.1 MB (64.25%, 88.55%)
+
+**Method 3**:  487 ms, 18.3 MB (18.73%, 33.82%)
+
+## Final Thoughts
+
+A binary heap ideally suited for this sort of problem, and Python makes it easy.
