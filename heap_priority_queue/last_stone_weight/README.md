@@ -20,9 +20,24 @@ Constraints:
 
 ## Thought Process
 
+Edge Cases / Caveats / Pitfalls:
+- no stones remaining -> return `0`
+- one stone remaining -> return its weight
+
 ## Procedure
 
-### Method 1
+### Method 1: Repeated Sorting
+
+AKA *Smash and Sort*.  This is similar to the approach used in *Kth Largest Element in a Stream* ([LC703](https://github.com/ArchTangent-study/leetcode/tree/main/bit_manipulation/kth_largest_element_in_a_stream)).
+
+Key Steps:
+1. If only no stones remain, return `0`
+2. If only one stone remains, return the weight of that stone
+3. Otherwise, "smash" two largest stones
+    - if stones are same value, destroy both
+    - if stones have different values:
+        1. destroy smaller stone return new stone equal to (larger - smaller)
+        2. sort the list of stones
 
 ## Results (Python 3)
 
