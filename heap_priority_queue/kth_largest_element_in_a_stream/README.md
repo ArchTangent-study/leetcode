@@ -54,8 +54,6 @@ Use a binary heap, keeping only the largest `k` values from the stream.
 
 This is **~9x** faster than method 1.
 
-*Note*: Python's `heapq` uses a *min heap*.  
-
 Key Steps:
 1. On initialization, use `heapq.heapify()` to convert `nums` into a binary heap
 2. Keep only the top `k` values after initialization (remove smallest via `heapq.heappop()`)
@@ -75,6 +73,7 @@ add 5   [5, 5, 7, 6]                    after heappush(heap, 5)
 add 8   [5, 6, 7, 8]                    after heappush(heap, 8)
         [6, 8, 7]                       keep only k highest via heappop()
 ```
+*Note*: Python's `heapq` uses a *min heap*.  
 
 Thoughts: Python's `heapq` makes this quite simple if you are aware of it.
 

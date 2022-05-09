@@ -22,9 +22,6 @@ class Solution:
         """Smash two stones together, returning remaining stone weight, if any"""
         if s1 < s2:
             return s2 - s1
-        if s1 > s2:
-            return s1 - s2
         
         # Stones are same weight -> return no stones
         return None
-        
