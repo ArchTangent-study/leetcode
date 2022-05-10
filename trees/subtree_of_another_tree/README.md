@@ -12,6 +12,15 @@ Constraints:
 - `-10^4 <= root.val <= 10^4`
 - `-10^4 <= subRoot.val <= 10^4`
 
+## Thought Process
+
+Edge Cases:
+- `root` and `subRoot` are both `null`
+- `root` exists while `subRoot` is `null`
+- `subRoot` exists while `root` is `null`
+- nodes both exist, but have different values
+- a `null` `subRoot` is the sub-tree of *any* tree -> always `true`
+
 ## Procedure
 
 ### Method 1: Collect Nodes and Compare Slices
@@ -32,6 +41,26 @@ The plan of action:
 ```
 This can be used to solve the problem without fear of going OOB when slicing.
 
+### Method 2: Recursive Comparison
+
+This was **~1.7x** slower than method 1.
+
+Big Picture:
+1. `subRoot` is a subtree of `root` if:
+    - `root` and `subRoot` are both `null` *OR*
+    - `root` and `subRoot` have same values *AND*
+    - `root` and `subRoot` have the same children
+2. Check each node of `root` against `subRoot` and apply the checks in step `1`.
+    - if for any given node in `root`, the result is `true`, then `subRoot` is a subTree of `root` -> return `true`.
+    - if all nodes in `root` are traversed without matching `subRoot`, return `false`.
+
+Steps:
+1. If the top-level `root` is the same as `subRoot`, early exit with `true`
+2. *Recursively* check the child nodes of `root` vs `subRoot` to see if *they* are a match.
+    - use *OR logic*, since only *one* of the child nodes needs to match `subRoot`.
+
 ## Results (Python 3)
 
 **Method 1**: 117 ms, 15.1 MB (91.78%, 64.85%)
+
+**Method 2**: 197 ms, 15.0 MB (27.99%, 63.91%)
