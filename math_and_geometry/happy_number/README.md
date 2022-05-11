@@ -79,8 +79,21 @@ Algorithm:
 5. Repeat from step `2` until a happy or unhappy number is found.
 
 Thoughts:
-- Since `2 * 2 = 4` and `3 * 3 = 9`, you could remove both `2` and `3` (or `4` and `9`) from the set of `bad_numbers` for an even smaller set.
+- Since `2 * 2 = 4` and `3 * 3 = 9`, you could remove both `2` and `3` (or `4` and `9`) from the set of `bad_numbers` for an even smaller set  of `{4, 5, 6, 8, 9}`.
+
+### Method 2: Repetition Check
+
+As shown in the *Thought Process* section above, there's a point in every unhappy number where it repeats itself.  This can be used as an exit condition.
+
+Algorithm:
+1. Create an empty set of `repeat_numbers`
+2. If `n == 1`: return `True`
+3. Peform `sumOfSquares(n)` to calculate new `n`
+4. If new `n` is already in `repeat_numbers`, return `False` (repeat).
+5. Repeat from step `2` until a happy or unhappy number is found.
 
 ## Results (Python 3)
 
 **Method 1**: 35 ms, 13.8 MB (88.01%, 61.63%)
+
+**Method 2**: 42 ms, 13.8 MB (65.56%, 97.13%)
