@@ -67,6 +67,17 @@ step 4          0001     1      End of iteration and carry = 1 -> append 1 to an
 result          1000     1      Reverse answer and return
 ```
 
+Other ideas:
+- using a Python `deque` with its `appendleft()` method to avoid having to reverse the answer. This would still require conversion to a `list` at the end, however.
+
+### Method 2: Reverse Iterate and Carry, Common Case First
+
+Same as method 1, with the most common case (LSD = `< 9`) handled first.
+
+Thoughts: this wound up having the exact same performance characteristics as method 1.
+
 ## Results (Python 3)
 
 **Method 1**: 32 ms, 13.9 MB (91.15%, 60.22%)
+
+**Method 2**: 32 ms, 13.9 MB (91.15%, 60.22%)
