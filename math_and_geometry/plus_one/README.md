@@ -51,7 +51,7 @@ Visualization:
 Digits = 123
         digit  answer  carry
 start                    1      always start with carry = 1
-step 1    3     4        0      append 3+1 to answer, set carry = 0
+step 1    3     4        0      append 3+1 to answer; set carry = 0
 step 2    2     42       0
 step 3    1     421      0
 step 4          421      0      End of iteration and carry = 0 -> do nothing
@@ -60,9 +60,9 @@ result          124      0      Reverse answer and return
 Digits = 999
         digit  answer  carry
 start                    1      always start with carry = 1
-step 1    9     0        1      digit is 9 -> append 0 to answer, set carry = 1
-step 2    9     00       1      digit is 9 -> append 0 to answer, set carry = 1
-step 3    9     000      1      digit is 9 -> append 0 to answer, set carry = 1
+step 1    9     0        1      digit is 9 -> append 0 to answer; set carry = 1
+step 2    9     00       1      digit is 9 -> append 0 to answer; set carry = 1
+step 3    9     000      1      digit is 9 -> append 0 to answer; set carry = 1
 step 4          0001     1      End of iteration and carry = 1 -> append 1 to answer
 result          1000     1      Reverse answer and return
 ```
@@ -74,10 +74,52 @@ Other ideas:
 
 Same as method 1, with the most common case (LSD = `< 9`) handled first.
 
+Reasoning: If all digits are chosen at random, there's only a `10%` chance that the LSD will be `9`, and thus only a `10%` chance for a carry to occur.  Then a `10%` for the next digit, and so on.  In other words, the most common scenario is where *no carry occurs* -> check for that case first.
+
 Thoughts: this wound up having the exact same performance characteristics as method 1.
+
+### Method 3: Tabular Match
+
+Reasoning behind this method:
+- The length of the `answer` will be `length(digits)` *or* `length(digits) + 1`
+- `answer` can be preallocated to `[0] * length(digits)`
+- Iteration can be done in reverse without needing to reverse `answer`
+- There are two key values to track: `digit` and `carry`
+- The above values can be viewed as a *table*
+
+Table:
+| digit | carry | new_digit | new_carry |
+|-------|-------|-----------|-----------|
+|  `9`  |  `1`  |    `0`    |    `1`    |
+|  `9`  |  `0`  |  `digit`  |    `0`    |
+| `<9`  |  `1`  | `digit+1` |    `0`    |
+| `<9`  |  `0`  |  `digit`  |    `0`    |
+
+Visualization, where `i = -1` and `carry = 1` at start:
+```
+Digits = 123
+        digit  answer  carry
+start          [000]     1      answer = [0] * len(digits)
+step 1    3    [004]     0      answer[i] = digit+1; set carry = 0; i -= 1
+step 2    2    [024]     0      answer[i] = digit; set carry = 0; i -= 1
+step 3    1    [124]     0      answer[i] = digit; set carry = 0; i -= 1
+result         [124]     0      End of iteration and carry = 0 -> return answer
+
+Digits = 999
+        digit  answer  carry
+start          [000]     1      answer = [0] * len(digits)
+step 1    9    [000]     0      answer[i] = 0; set carry = 0; i -= 1
+step 2    9    [000]     0      answer[i] = 0; set carry = 0; i -= 1
+step 3    9    [000]     0      answer[i] = 0; set carry = 0; i -= 1
+result         [1000]    1      End of iteration and carry = 1 -> return [1] + answer
+```
+
+This method is about **18%** slower than methods 1 and 2.
 
 ## Results (Python 3)
 
 **Method 1**: 32 ms, 13.9 MB (91.15%, 60.22%)
 
 **Method 2**: 32 ms, 13.9 MB (91.15%, 60.22%)
+
+**Method 3**: 38 ms, 13.8 MB (69.75%, 60.22%)
