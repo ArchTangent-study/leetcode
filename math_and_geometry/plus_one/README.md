@@ -108,9 +108,9 @@ result         [124]     0      End of iteration and carry = 0 -> return answer
 Digits = 999
         digit  answer  carry
 start          [000]     1      answer = [0] * len(digits)
-step 1    9    [000]     0      answer[i] = 0; set carry = 0; i -= 1
-step 2    9    [000]     0      answer[i] = 0; set carry = 0; i -= 1
-step 3    9    [000]     0      answer[i] = 0; set carry = 0; i -= 1
+step 1    9    [000]     0      leave answer[i] = 0 and carry = 1; i -= 1
+step 2    9    [000]     0      leave answer[i] = 0 and carry = 1; i -= 1
+step 3    9    [000]     0      leave answer[i] = 0 and carry = 1; i -= 1
 result         [1000]    1      End of iteration and carry = 1 -> return [1] + answer
 ```
 
