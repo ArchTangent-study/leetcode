@@ -15,19 +15,22 @@ class Solution:
             match character:
                 # For closing brackets, top of stack *must* be matching opening bracket
                 case ')':                
-                    if len(brackets) == 0 or brackets[-1] != '(':
+                    if len(brackets) > 0 and brackets[-1] == '(':
+                        brackets.pop()
+                    else:
                         return False
-                    brackets.pop()
-                case ']':                
-                    if len(brackets) == 0 or brackets[-1] != '[':
+                case ']':               
+                    if len(brackets) > 0 and brackets[-1] == '[':
+                        brackets.pop()
+                    else:
                         return False
-                    brackets.pop()
                 case '}':                
-                    if len(brackets) == 0 or brackets[-1] != '{':
-                        return False
-                    brackets.pop()                                
+                    if len(brackets) > 0 and brackets[-1] == '{':
+                        brackets.pop()
+                    else:
+                        return False                         
                 case _:
-                    # Add opening bracket to stack
+                    # It's an opening bracket -> add to stack
                     brackets.append(character)
 
         # If all parentheses are properly closed, brackets will be empty

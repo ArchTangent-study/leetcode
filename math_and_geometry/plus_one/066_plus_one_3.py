@@ -21,13 +21,15 @@ class Solution:
                 case False, 0:
                     answer[i] = digit
                     carry = 0
+                # Note: this step can be removed because when digit = 9 and carry = 1:
+                # answer[i] is already 0 and carry is already 1
                 case False, 1:
                     answer[i] = 0
                     carry = 1
             # Decrement digit index, since moving in reverse
             i -=1
 
-        # Return part of all of answer depending on final carry value
+        # Return answer or add extra 1 depending on final carry value
         if carry == 0:
             return answer
         else:
