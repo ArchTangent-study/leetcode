@@ -24,7 +24,7 @@ Edge Cases / Caveats / Pitfalls:
 - Symbolic characters like `:`, `,`, etc.
 
 Approaches:
-1. Converging iteration: start at *both ends* of the string `s` and ensure that both letters at each iteration point match
+1. Converging iteration: start at *both ends* of the string `s` and ensure that both letters at each iteration point match.  Can stop if you meet halfway, since a palindrome will be symmetrical.
 2. Reverse and compare: reverse string `s`, then compare each letter one-by-one
 
 ## Procedure

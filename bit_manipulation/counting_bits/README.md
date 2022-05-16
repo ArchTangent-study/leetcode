@@ -132,10 +132,34 @@ nums   = [0, 1, 2, 3, 4, 5]
 answer = [0, 1, 1, 2, 1, 2] <- add count of 2 to the answer
 ```
 Other notes:
-- since `n` is known in advance, you can preallocate the `answer` array to `[0]*n`
-- for any value of `n`, the count for `n` is stored in `answer[n]`
+- Since `n` is known in advance, you can preallocate the `answer` array to `[0]*n`
+- For any value of `n`, the count for `n` is stored in `answer[n]`
 
 Thoughts: this was about **40% faster** than method 2, while being more concise.
+
+### Method 4: Dynamic Programming Refined
+
+An attempt to make the above approaches more succinct and easier to understand.
+
+Big Picture:
+- Since `n` is known in advance, you can preallocate the `answer` array to `[0]*n`
+- The bit count for each `number` in `n` is stored in an index equal to `number`.
+- Each `number`'s bit count is equal to that of `number >> 1`, plus the **sign bit**.
+- Sign bit can be calculated by taking `number % 2`
+
+Example where `n == 5`:
+1. `number = 0`: answer equals that of `0` (`0 >> 1 = 0`), and adds `0` since it's even
+    - `answer[0 >> 1] + 0 % 2 = 0`
+2. `number = 1`: answer equals that of `0` (`1 >> 1 = 0`), and adds `1` since it's odd
+    - `answer[1 >> 1] + 1 % 2 = 1`
+3. `number = 2`: answer equals that of `1` (`2 >> 1 = 1`), and adds `0` since it's even
+    - `answer[2 >> 1] + 2 % 2 = 1`
+4. `number = 3`: answer equals that of `1` (`3 >> 1 = 1`), and adds `1` since it's odd
+    - `answer[3 >> 1] + 3 % 2 = 2`
+5. `number = 4`: answer equals that of `2` (`4 >> 2 = 2`), and adds `0` since it's even
+    - `answer[2 >> 1] + 2 % 2 = 1`
+6. `number = 5`: answer equals that of `2` (`5 >> 1 = 2`), and adds `1` since it's odd
+    - `answer[5 >> 1] + 5 % 2 = 2`
 
 ## Results (Python 3)
 
