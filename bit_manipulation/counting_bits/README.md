@@ -169,6 +169,8 @@ Example where `n == 5`:
 
 **Method 3**:  102 ms, 20.9 MB (72.13%, 31.30%)
 
+**Method 4**:  169 ms, 20.7 MB (34.65%, 79.89%)
+
 ## Lessons Learned
 1. Draw it out:  binary problems have patterns that can be seen easily if the bitwise representations are listed.
 2. Use tables: whip up quick tables of inputs, outputs, and variable values at particular steps of the program.
