@@ -46,4 +46,4 @@ Thoughts:
 
 ## Results (Python 3)
 
-**Method 1**:  69 ms, 45.15 MB (%, %)
+**Method 1**:  69 ms, 14.18 MB (45.15%, 33.62%)
