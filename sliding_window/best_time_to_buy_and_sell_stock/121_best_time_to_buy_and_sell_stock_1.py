@@ -1,6 +1,7 @@
-# NOTE: this implementation FAILED due to exceeding time limit.
+# NOTE: this implementation is accurate, but FAILED due to exceeding time limit.
 #
 #  Saved for educational purposes.
+
 from typing import List
 
 class Solution:
