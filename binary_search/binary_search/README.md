@@ -49,6 +49,14 @@ mid_ix = left_ix + right_ix // 2    # WRONG
 mid_ix = (left_ix + right_ix) // 2  # CORRECT
 ```
 
+### Method 2: Binary Search (Succinct)
+
+A slightly less verbose version of method 1 that removes the final `if` statement.
+
+*Note*: this was almost **2x slower** than method 1, and it may be because less than `<` checks are faster to perform than less than or equal to `<=` ones.
+
 ## Results (Python 3)
 
 **Method 1**: 253 ms, 15.5 MB (82.50 %, 73.34%)
+
+**Method 2**: 483 ms, 15.5 MB (5.69 %, 22.99%)
