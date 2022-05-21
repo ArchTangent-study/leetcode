@@ -21,7 +21,7 @@ Follow up: A linked list can be reversed either iteratively or recursively. Coul
 
 ## Procedure
 
-### Method 1 (Recursive)
+### Method 1: Recursive
 
 This one gave me more trouble than I anticipated.
 
@@ -34,6 +34,14 @@ The process:
 
 Thoughts: this can definitely be cleaned up a bit (deduplication, etc.), but it works.
 
+### Method 2: Recursive (Improved)
+
+Same as method 1, but with less redundant code.
+
+This was **~20%** faster than method 1.
+
 ## Results (Python 3)
 
 **Method 1**: 63 ms, 20.4 MB (21.66%, 20.4%)
+
+**Method 2**: 52 ms, 20.4 MB (43.07%, 9.56%)
