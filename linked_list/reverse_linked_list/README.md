@@ -19,6 +19,25 @@ Edge Cases / Caveats / Pitfalls:
 
 Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?
 
+## Visualization
+
+Where `n` is `null`:
+```
+Go from:
+     1 > 2 > 3 > 4 > 5
+To:
+     5 > 4 > 3 > 2 > 1
+
+        1 > 2   becomes
+    n < 1
+        2 > 3   becomes
+    1 < 2
+        3 > 4   becomes
+    5 < 4
+        5 > n   becomes
+    4 < 5
+```
+
 ## Procedure
 
 ### Method 1: Recursive
@@ -40,8 +59,16 @@ Same as method 1, but with less redundant code.
 
 This was **~20%** faster than method 1.
 
+### Method 3: Iterative (Follow-Up)
+
+This is similar logic to method 2, but contained in a `while` loop rather than using recursion.
+
+Thoughts: this wasn't particularly fast, but it highly memory efficient.
+
 ## Results (Python 3)
 
 **Method 1**: 63 ms, 20.4 MB (21.66%, 20.4%)
 
 **Method 2**: 52 ms, 20.4 MB (43.07%, 9.56%)
+
+**Method 3**: 80 ms, 15.4 MB (5.08%, 15.4%)
