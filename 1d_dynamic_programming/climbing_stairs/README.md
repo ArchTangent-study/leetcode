@@ -41,14 +41,28 @@ Looking at the visualization above, some patterns begin to emerge:
 
 This allows for an approach using `list`s and `set`s, that fails only due to using too much memory.  Perhaps there's a better way?
 
+### Method 2: Hash Cache
+
+There's a simpler pattern found in the above visualization:  the number of step combinations for `number` is equal to sum of those of `number - 1` and `number - 2` combined.
+
+Examples:
+- The # of unique combinations for `3` is equal to those of `2` plus those of `1`.
+- The # of unique combinations for `4` is equal to those of `3` plus those of `2`.
+- The # of unique combinations for `5` is equal to those of `4` plus those of `3`.
+
+This can be converted into an algorithm, using a hashmap that *caches* the previous values.
+
 ## Results (Python 3)
 
-**Method 1**:  ms,  MB (%, %)
+**Method 1**:  Failed - Memory Limit Exceeded
+
+**Method 2**:  49 ms, 13.9 MB (28.16%, 12.17%)
 
 ## Pitfalls and Lessons Learned
 1. There's always a pattern:  once you visualize a pattern, the solution becomes far more obvious.
-2. Python's `list` and `collections.deque` are not hashable:  need to use a tuple inside of the dictionary. Just convert to/from (a) `list` to `tuple` or  (b) `deque` to `tuple`.
-3. Python automatically converts single-value `tuple`s into the contained value: `(1)` is automatically coerced into `1`, `("fun")` into `"fun"`, etc.  This caused quite a headache while I was trying my solution.
+2. Look for deeper patterns:  
+3. Python's `list` and `collections.deque` are not hashable:  need to use a tuple inside of the dictionary. Just convert to/from (a) `list` to `tuple` or  (b) `deque` to `tuple`.
+4. Python automatically converts single-value `tuple`s into the contained value: `(1)` is automatically coerced into `1`, `("fun")` into `"fun"`, etc.  This caused quite a headache while I was trying my solution.
 
 Appending left and right with tuples:
 ```python
