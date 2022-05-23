@@ -17,11 +17,17 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Cases where values are equal to each other (`<=` cases)
+- "Orphaning" a node while splicing (use copies)
+- Uneven list lengths
+- Null lists
+- When to stop splicing (exit point)
+- Preserving the initial pointer of the answer (`head`)
 
 ## Procedure
 
-### Method 1
+### Method 1: Seek and Swap
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 39 ms, 13.8 MB (85.48%, 79.41%)
