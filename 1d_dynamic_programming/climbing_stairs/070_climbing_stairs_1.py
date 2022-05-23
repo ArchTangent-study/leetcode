@@ -1,8 +1,5 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        # Each number of combininations in `ways` is the sum of the combinations
-        # of all step patterns that add to the number.
-
         # Dict to list of lists, storing all the combinations (ways) to step
         ways = {
             1: [ [1] ],

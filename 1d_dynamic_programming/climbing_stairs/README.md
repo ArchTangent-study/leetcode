@@ -52,11 +52,33 @@ Examples:
 
 This can be converted into an algorithm, using a hashmap that *caches* the previous values.
 
+### Method 3: Dynamic Sum
+
+Another visualization:
+```
+n     | 3   4   5   6   
+------|--------------
+num-1 | 2   3   5   8
+num-2 | 1   2   3   5
+result| 3   5   8  13
+```
+For every `n` greater than `2`, each `result` is equal to sum of results for `(n-1)` and `(n-2)`.
+
+For every next `n`:
+    - the `n-1` is equal to the previous `result`
+    - the `n-2` is equal to the previous `n-1`
+
+This can be converted into an algorithm *without* using a hashmap.
+
+Speed: this was *incredibly* fast and efficient (**94%**, **96%**), by far the best of the three solutions.
+
 ## Results (Python 3)
 
 **Method 1**:  Failed - Memory Limit Exceeded
 
 **Method 2**:  49 ms, 13.9 MB (28.16%, 12.17%)
+
+**Method 3**:  27 ms, 13.7 MB (94.89%, 96.62%)
 
 ## Pitfalls and Lessons Learned
 1. There's always a pattern:  once you visualize a pattern, the solution becomes far more obvious.

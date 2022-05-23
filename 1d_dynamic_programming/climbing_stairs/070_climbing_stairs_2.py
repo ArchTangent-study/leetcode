@@ -1,8 +1,5 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        # The number of step combinations for `number` is equal to sum of those of
-        # `number - 1` and `number - 2` combined.
-
         # Number of combinations for these is already known
         ways = {
             1: 1,
