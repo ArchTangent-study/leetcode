@@ -61,7 +61,18 @@ n     | 3   4   5   6
 num-1 | 2   3   5   8
 num-2 | 1   2   3   5
 result| 3   5   8  13
+
 ```
+An even better visualization using a [decision tree](https://en.wikipedia.org/wiki/Decision_tree):
+```
+                        0
+             1                     2
+        2         3           3          4
+     3     4   4     5     4     5    5     6
+   4   5 5   5           5 
+ 5  
+```
+
 For every `n` greater than `2`, each `result` is equal to sum of results for `(n-1)` and `(n-2)`.
 
 For every next `n`:
