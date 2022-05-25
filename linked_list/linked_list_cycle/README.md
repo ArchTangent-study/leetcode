@@ -1,4 +1,4 @@
-# Linked List Cycle ([L141](https://leetcode.com/problems/linked-list-cycle/))
+# Linked List Cycle ([LC141](https://leetcode.com/problems/linked-list-cycle/))
 Difficulty: **Easy**
 
 ## Problem
@@ -16,12 +16,31 @@ Constraints:
 
 ## Thought Process
 
+Questions:
+- How do you know when a cycle is repeated?
+- Can you just check to see if a pointer has been repeated?
+- does `pos` act as a pointer?
+- Does each `Node` have a unique `val`?  
+
 Edge Cases / Caveats / Pitfalls:
+- Empty list (`head` is `null`)
 
 ## Procedure
 
-### Method 1
+### Method 1: Set Membership Check
+
+The simplest method that came to mind.  
+1. If `head` is `null`, return `false`.
+2. Create a `set` of `ListNode` pointers.
+3. Traverse the linked list from `head`.
+4. If the `ListNode` is in the `set`, return `true` (there's a cycle).
+5. Add the `ListNode`'s pointer to the `set`.
+6. If the entire list is traversed without finding a duplicate, return `false`.
+
+Complexity:
+- Time: all nodes are traversed once (plus one) -> `O(n)`
+- Space: all nodes stored once -> `O(n)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 57 ms, 17.9 MB (86.32%, 9.95%)

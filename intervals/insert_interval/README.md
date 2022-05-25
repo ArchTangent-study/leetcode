@@ -1,0 +1,30 @@
+# Insert Interval ([LC057](https://leetcode.com/problems/insert-interval/))
+Difficulty: **Medium**
+
+## Problem
+
+You are given an array of non-overlapping intervals `intervals` where `intervals[i] = [start_i, end_i]` represent the start and the end of the `ith` interval and `intervals` is sorted in **ascending order** by `start_i`. You are also given an interval `newInterval = [start, end]` that represents the start and end of another interval.
+
+Insert `newInterval` into `intervals` such that `intervals` is still sorted in ascending order by `start_i` and `intervals` still does not have any overlapping intervals (merge overlapping intervals if necessary).
+
+Return `intervals` *after the insertion*.
+
+Constraints:
+- `0 <= intervals.length <= 10⁴`
+- `intervals[i].length == 2`
+- `0 <= start_i <= endi <= 10⁵`
+- `intervals is sorted by start_i in ascending order.`
+- `newInterval.length == 2`
+- `0 <= start <= end <= 10⁵`
+
+## Thought Process
+
+Edge Cases / Caveats / Pitfalls:
+
+## Procedure
+
+### Method 1
+
+## Results (Python 3)
+
+**Method 1**:  ms, MB (%, %)
