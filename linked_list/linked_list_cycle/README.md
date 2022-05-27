@@ -21,6 +21,8 @@ Questions:
 - Can you just check to see if a pointer has been repeated?
 - does `pos` act as a pointer?
 - Does each `Node` have a unique `val`?  
+- is the number of `Node`s known in advance?  If so, you can stop as soon as `n+1` `Nodes` have been traversed.
+- is there an order (ascending, descending) in which `Node` addresses are assigned?  Do later `Node`s have a higher/lower address than the previous?
 
 Edge Cases / Caveats / Pitfalls:
 - Empty list (`head` is `null`)
@@ -41,6 +43,24 @@ Complexity:
 - Time: all nodes are traversed once (plus one) -> `O(n)`
 - Space: all nodes stored once -> `O(n)`
 
+### Method 2: Two Pointers (Follow-Up)
+
+After trying various ways to solve in `O(1)` space using XOR on the `Node` addresses, I found this solution.
+
+Use two separate pointers:
+- `slow`: a pointer that advances by `1`
+- `fast`: a pointer that advances by `2`
+
+If there's a cycle, the `fast` pointer is *guaranteed* to loop around and catch the slow pointer at some point -> return `true`.
+
+If there's no cycle: the `fast` pointer will encounter the final `null` `Node` -> return `false`.
+
+Complexity:
+- Time: `fast` always catches `slow` in *at most* `length(list)` turns -> `O(n)`
+- Space: stores two pointers -> `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**: 57 ms, 17.9 MB (86.32%, 9.95%)
+
+**Method 2**: 102 ms, 17.5 MB (17.28%, 66.52%)
