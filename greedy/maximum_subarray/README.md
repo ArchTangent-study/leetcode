@@ -21,8 +21,8 @@ Edge Cases / Caveats / Pitfalls:
 - Zero values in `nums` (higher than any negative)
 
 Approaches:
-1. Brute force: attempt every possible contiguous subarray -> `O(n³)`
-2. Iterate forward, taking a running sum of all values, then iterate backward, collecting the largest sum from the highest point.
+1. Brute force: attempt every possible contiguous subarray -> arithmetic series -> `operations = n(n+1)/2` -> `O(n²)`
+2. Iterate forward, taking a running sum of all values, collecting the largest sum reached.
 
 ## Procedure
 
@@ -33,7 +33,7 @@ Key Ideas:
 
 Key Steps:
 1. Store `running_sum` and `highest_sum` values.
-    - *Note*: `highest_sum` should be initialized to the *lowest possible integer*
+    - *Note*: both values should be initialized to the *lowest possible integer*
 2. Iterate over each `num` in `nums`
 3. Set `running_sum` to `max(num, running_sum + num)`.
     - So if `running_sum < 0`, `running_sum = num`.  That is, ignore any *negative* values to the left of the current number.
@@ -47,9 +47,34 @@ Complexity:
 Pitfalls:
 - Initializing default `highest_sum` value to `0` instead of minimum integer
 
+Example for `nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]` where:
+    - `R` is running sum
+    - `C` is current number in `nums`
+```python
+
+step  R    C   R(new)  high
+ 1  -inf  -2   -2      -2
+ 2   -2    1    1       1
+ 3    1   -3   -2       1 
+ 4   -2    4    4       4
+ 5    4   -1    3       4  
+ 6    3    2    5       5
+ 7    5    1    6       6 
+ 8    6   -5    1       6
+ 9    1    4    5       6
+
+return high: 6
+```
+
+## Method 2: Divide and Conquer (Follow-Up)
+
+This method uses D&C, similar to the Quicksort algorithm.  I took a *lot* longer than expected, and the performance was not spectacular (almost 2x slower than method 1).  This method can definitely be refined.
+
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 983 ms, 28 MB (43.96%, 21.99%)
+
+**Method 2**: 1631 ms, 27.9 MB (5.01%, 78.56%)
 
 ## Lessons Learned
 1. If stuck, start with simplest approach you can think of, then build on it
