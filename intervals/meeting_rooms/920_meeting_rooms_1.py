@@ -22,5 +22,6 @@ class Solution:
             # If previous meeting ends after current one starts, fail.
             if previous.end > current.start:
                 return False
-
+                
+        # If no meeting overlap, you can attend all meetings
         return True
