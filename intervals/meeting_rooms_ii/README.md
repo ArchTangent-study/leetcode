@@ -17,6 +17,7 @@ Edge Cases / Caveats / Pitfalls:
 
 Key Ideas:
 - Meetings conflict with themselves:  a single meeting requires 1 meeting room.
+- Can draw intervals on the *same timeline*:  since you're checking for *concurrent conflicts*, this approach makes the problem easy to understand.
 
 ## Procedure
 
@@ -46,6 +47,13 @@ Example 1: `intervals = [(0,30), (5,10), (15,20)]`
         
 time    0     5    10    15    20    25    30
 ```
+
+Can be redrawn ***on the same timeline*** as:
+```
+        [-----[-----]-----[-----]-----------]          
+time    0     5    10    15    20    25    30
+```
+
 ```python
 times = [(0, True), (5, True), (10, False), (15, True), (20, False), (30, False)]
 
@@ -80,6 +88,14 @@ Example 2: `intervals = [(0,10), (10,20), (20,30)]`
         
 time    0     5    10    15    20    25    30
 ```
+
+Can be redrawn ***on the same timeline*** as:
+```
+                    [           [
+        [-----------]-----------]-----------]          
+time    0     5    10    15    20    25    30
+```
+
 ```python
 times = [(0, 1), (10, -1), (10, 1), (20, -1), (20, 1), (30, -1)]
 
