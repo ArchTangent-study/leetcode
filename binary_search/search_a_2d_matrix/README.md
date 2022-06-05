@@ -29,7 +29,7 @@ Iterate over each subarray in the main array, and checks if the `target` is with
 
 Thoughts:  while this way works and was quite fast (faster than **82.22%** of submissions), the problem specifies that the algorithm should be *efficient*.  There's likely a better way to do this (e.g. using *binary search*).
 
-Time Complexity: `O(n)`
+Time Complexity: `O(m + n)`
 
 ### Method 2: Double Binary Search
 
