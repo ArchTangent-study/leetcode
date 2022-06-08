@@ -8,11 +8,17 @@ According to the definition of LCA on Wikipedia:
 > The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow **a node to be a descendant of itself**).
 
 Constraints:
-- The number of nodes in the tree is in the range `[2, 10^5]`.
-- `-10^9 <= Node.val <= 10^9`
+- The number of nodes in the tree is in the range `[2, 10⁵]`.
+- `-10⁹ <= Node.val <= 10⁹`
 - All `Node.val` are unique.
 - `p != q`
 - `p` and `q` will exist in the BST.
+
+## Thought Process
+
+Edge Cases / Caveats / Pitfalls:
+- `p` or `q` not present:  N/A as per constraints
+- `p` or `q` are the LCA:  this is possible if `p` is a child of `q` (or vice-versa)
 
 ## Procedure
 

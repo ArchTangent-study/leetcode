@@ -19,6 +19,10 @@ The first way that came to mind.  The plan of action:
 
 The problem with this approach is that is requires *full traversal* of *both* trees before comparison occurs.  There's certainly a way to each each node as they are encountered, allowing for an optimal *early exit* if a given node pair doesn't match.
 
+Complexity:
+- Time: traverse each node once and compare values once -> `O(2n)` -> `O(n)`
+- Space: store the `val` of each node -> `O(n)`
+
 ### Method 2: Sequential List Comparison
 
 Builds upon method 1.  The differences:
@@ -33,23 +37,31 @@ This solution wound up being even *slower* than method 1.  Perhaps it would be f
 
 There has to be a better way:  it would be ideal to check the `nth` node of each tree *as they are encountered*.  This would require far less memory, and exit as soon as the first unmatched pair occurs.
 
+Complexity:
+- Time: traverse each node once and compare values once -> `O(2n)` -> `O(n)`
+- Space: store the `val` of each node -> `O(n)`
+
 ### Method 3: Paired Recursion
 
 Well, turns out there was a better way!  It was a struggle to find the right way to compare `p` and `q` one node at a time, without using two stacks (which would have worked, but been far less elegant and efficient).  All that's needed is to...call the `isSameTree()` function recursively.
 
 One submission failed due to a runtime error.  The cause: an incomplete early exit. This:
-```
+```python
         if p is None:
             return q is None
 ```
 instead of this:
-```
+```python
         if p is None:
             return q is None
         if q is None:
             return p is None
 ```
 The first example doesn't account for the case where `p` is a valid node while `q` is not.  Despite the minor setback, this was by far the best (and most succinct) of my three solutions.
+
+Complexity:
+- Time: traverse and compare each node once -> `O(n)`
+- Space: no extra space required -> `O(1)`
 
 ## Results (Python 3)
 
