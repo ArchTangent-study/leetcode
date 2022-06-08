@@ -2,8 +2,8 @@ from typing import List
 
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-        # Sort intervals by (start, end)          
-        intervals.sort()
+        # Sort intervals by (start)          
+        intervals.sort(key=lambda i: i[0])
         # Running end value, initialized to minimum value in constraints
         running_end = -50000
         answer = 0
@@ -19,3 +19,4 @@ class Solution:
                 running_end = end
 
         return answer
+        

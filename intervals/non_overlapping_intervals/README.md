@@ -52,4 +52,4 @@ Complexity:
 
 ## Results (Python 3)
 
-**Method 1**: 2813 ms, 52.9 MB (7.45%, 22.62%)
+**Method 1**: 1678 ms, 52.0 MB (63.88%, 92.69%)
