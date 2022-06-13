@@ -22,7 +22,7 @@ Edge Cases / Caveats / Pitfalls:
 
 ## Procedure
 
-### Method 1
+### Method 1: Recursive Comparison
 Recursively choose the left or right node path based on the relation between `Node.val` and the values of `p` and `q`.  `Node` is the LCA if `p` and `q` are to either side of the node.
 
 Identify three different scenarios:
@@ -30,13 +30,21 @@ Identify three different scenarios:
 2. If both `p` and `q` are greater than `Node`:  traverse the right node and repeat
 3. Otherwise, `Node` is the LCA.
 
-### Method 2
+Complexity:
+- Time: half-split the tree -> `O(log n)`
+- Space: no extra space -> `O(1)`
+
+### Method 2: Recursive Comparison (Improved)
 
 Same as method 1, with one change - locally assign each `Node` value before comparing:
 ```
 rv, pv, qv = root.val, p.val, q.val
 ```
 This was about **2x** faster.
+
+Complexity:
+- Time: half-split the tree -> `O(log n)`
+- Space: no extra space -> `O(1)`
 
 ## Results (Python 3)
 
