@@ -45,6 +45,7 @@ Key Idea: A word `W1` is an anagram of word `W2` if they have the ***same count 
 
 Caveats:
 - when converting `a-z` into numbers using `ord()`, you need to iterate from `ord(a)` to `ord(z) + 1` to include `z`.  Using `ord(z)` as the end range will only include letters from `a-y`.
+- When tracking the count of `a-z` letters in each string, you ***must*** track even the letters whose count is zero.
 
 Complexity:
 - Time: `O(n)`
