@@ -19,11 +19,22 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Not accounting for blank space `"."`
+- Handling the nine sub boxes (how to properly index them)
 
 ## Procedure
 
-### Method 1
+### Method 1: Set Duplicate Detection
+
+Big Picture
+
+Use `13` sets to track duplicates for the following contexts:
+1. `row` context: every number in each subarray in the `board`. The `1` row set is cleared at the start of every new row.
+2. `column` context: each number in the row has its own column, and is added to one of `9` `column` sets based on its index in the row.
+3. `box` context: Every three numbers in a row, a new box is entered (`box_index = row_index // 3`).  Every three rows, each `box` set is reset.  There are `3` box sets active at a given time.
+
+If at any point, a duplicate value is found in a set, return `False`.  If the entire `board` is traversed without a duplicate being found, return `True`.
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 183 ms, 13.9 MB (17.22%, 81.50%)

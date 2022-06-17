@@ -14,7 +14,7 @@ class Solution:
             return prev
         
         # Otherwise reverse w/temporary values and recursively call
-        original_next = node.next
+        temp_next = node.next
         node.next = prev
         
-        return self.reverseNodes(original_next, node)
+        return self.reverseNodes(temp_next, node)

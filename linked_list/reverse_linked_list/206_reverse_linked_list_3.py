@@ -11,12 +11,13 @@ class Solution:
         current = head
         # Iterate over while loop while a non-None node exists
         while current is not None:
-            # Swap values using original node.next as a temp value
-            original_next = current.next
+            # Create temporary next value
+            temp_next = current.next
+            # Point current to previous (reversing)
             current.next = previous
-            # Prepare to move to next node
+            # Push current back into previous
             previous = current
-            current = original_next
-        
-        return previous
-        
+            # Replace void left by moved current with temporary next
+            current = temp_next
+
+            return previous
