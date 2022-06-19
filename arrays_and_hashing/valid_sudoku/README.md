@@ -35,6 +35,12 @@ Use `13` sets to track duplicates for the following contexts:
 
 If at any point, a duplicate value is found in a set, return `False`.  If the entire `board` is traversed without a duplicate being found, return `True`.
 
+Complexity:
+- Time: traverse `m * n` elements once, using `O(1)` set operations -> `O(m*n)`
+- Space: `13` sets with at worst `max(n, m)` numbers in each -> `O(m+n))`
+
+...But since the dimensions are already known and unchanging, is it `O(1)` for both?
+
 ## Results (Python 3)
 
 **Method 1**: 183 ms, 13.9 MB (17.22%, 81.50%)
