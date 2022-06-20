@@ -48,8 +48,27 @@ Complexity:
 - Time: multiple constant time operations per number in input -> `O(n)`
 - Space: two maps, storing each number in input -> `O(n)`
 
-*Note*: this can be done using a single map of `{number: [low, high]}` data, but using two maps is what first came to mind.
+*Note*: this can be done using a single map of `{number: [low, high]}` data, but using two maps is what first came to mind.  See the `_alt` version for an example.
+
+### Method 2: Left-to-Right Set Deduplication
+
+This way has two advantages:
+- Requires only one data structure
+- Works in one direction (left to right) vice two (number to low, number to high)
+
+Steps:
+1. Gather numbers into a set `number_set` to deduplicate
+2. Iterate over each `number` in `nums`
+3. If `number` starts a sequence (nothing to its left), seek to the right (`+1` increments) for contiguous values in `number_set` until the end of sequence is found.
+    - remove any contiguous values from `number_set`
+4. Update `answer` with the highest `span` count among all sequences
+
+Complexity:
+- Time: one traversal to build set, another to count sequence -> `O(n)`
+- Space: one set storing each number in input -> `O(n)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 695 ms, 35.7 MB (44.91%, 6.51%)
+
+**Method 2**: 512 ms, 28.6 MB (57.86%, 36.35%)
