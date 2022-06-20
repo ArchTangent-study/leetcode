@@ -14,6 +14,7 @@ Please implement `encode` and `decode`.
 Edge Cases / Caveats / Pitfalls:
 - Strings that use the same characters as your delimiter (e.g. `delimiter == '32#'` and `string == "#wow#ie"`)
 - Strings that use digits that might appear in delimiter (e.g. `delimiter == '2#'` and `string == "2#1337#4u"`)
+- Empty strings, e.g. `["what", "", "about", "", "this"]`
 
 ## Procedure
 
