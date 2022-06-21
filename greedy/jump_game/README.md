@@ -13,7 +13,7 @@ Edge Cases / Caveats / Pitfalls:
 
 ## Procedure
 
-### Method 1: Backtracking
+### Method 1: Reverse Iteration
 
 Big Picture: work backward from finish, starting with `0` required jump distance.
 
@@ -24,6 +24,10 @@ Steps:
 2. At end of iteration:
     - if `required > 1`:  there's excess steps -> fail -> return `False`
     - if `required == 1`: you have enough steps -> pass -> return `True`
+
+Complexity:
+- Time: one traversal of `nums` -> `O(n)`
+- Space: constant space -> `O(1)`
 
 ### Method 2: Greedy
 
@@ -37,6 +41,10 @@ Steps:
     - if `jump_power > 1`: decrement it by `1` and continue
     - if `jump_power == 0`: can't move any further -> return `False`
 5. If you make it to last index, return `True`.
+
+Complexity:
+- Time: one traversal of `nums` -> `O(n)`
+- Space: constant space -> `O(1)`
 
 ## Results (Python 3)
 
