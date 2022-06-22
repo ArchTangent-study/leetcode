@@ -8,6 +8,23 @@ Edge Cases / Caveats / Pitfalls:
 - length of `nums` is `1`: no jumps required
 - finding an index that allows a finish sooner than current jump
 
+## Visualization
+
+```
+    ------|         jump 1
+      --|
+        ----|       jump 2
+            ----|   jump 3
+              --|
+    3 1 2 0 2 1 6   nums
+    0 1 2 3 4 5 6   ix
+```
+For this case, the total number of `jumps` required is `3`.
+
+Notes:
+- jump at index `[0]` `(3)` can't get over the `0`, and needs reserve jump at index `[2]`
+- jump at index `[4]` `(2)` allows for jumping to the finish before reaching index `[5]`
+
 ## Procedure
 
 ### Method 1: Greedy Reserve
