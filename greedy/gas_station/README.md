@@ -31,6 +31,26 @@ Edge Cases / Caveats / Pitfalls:
 - Length of `gas`/`cost` being `1`
 - Zero `gas` values
 
+## Visualization
+
+You can simulate traversal of a single loop by doubling the input lists.
+
+So this:
+```
+      /-----[0]------\
+    [4]             [1]     indexes
+      \--[3]----[4]--/
+```
+
+Turns into this:
+```
+   1    2    3    4    5    1    2    3    4    5       gas
+  [0]--[1]--[2]--[3]--[4]--[0]--[1]--[2]--[3]--[4]      index
+   3    4    5    1    2    3    4    5    1    2       cost
+```
+
+If you traverse the entire "unrolled" list without finding a solution, you know you have done an entire loop of the track.
+
 ## Procedure
 
 ### Method 1: Greedy Doubled List Iteration

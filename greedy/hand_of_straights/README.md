@@ -1,6 +1,8 @@
 # Hand of Straights ([LC846](https://leetcode.com/problems/hand-of-straights/))
 Difficulty: **Medium**
 
+*Note*: This question is the same as ([LC1296](https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/))
+
 ## Problem
 
 Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size `groupSize`, and consists of `groupSize` consecutive cards.
@@ -15,6 +17,10 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- `hand` length is `1`
+
+Ideas:
+- Sorting beforehand
 
 ## Procedure
 
