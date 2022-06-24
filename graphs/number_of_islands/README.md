@@ -16,11 +16,23 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Bounds checks
+- Indexing errors
+- Properly accessing grid tiles (using `grid[y][x]` vs `grid[x][y]`)
 
 ## Procedure
 
-### Method 1
+### Method 1: Breadth-First Search
+
+Big Picture:
+1. Iterate over `grid`, marking each tile as `explored`.
+2. If a land tile is found:
+    - increment `island_count` by `1`
+    - perform `BFS` (in `up`,`down`,`left`, and `right` directions), collecting all contiguous land tiles and stopping when no neighbors remain.
+3. Return `island_count`.
+
+Thoughts: there are definitely some ways to improve memory usage.
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**:  391 ms, 28.9 MB (69.27%, 5.01%)
