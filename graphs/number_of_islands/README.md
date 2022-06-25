@@ -31,6 +31,10 @@ Big Picture:
     - perform `BFS` (in `up`,`down`,`left`, and `right` directions), collecting all contiguous land tiles and stopping when no neighbors remain.
 3. Return `island_count`.
 
+Complexity:
+- Time: don't visit any coordinate more than once -> `O(n)`
+- Space: `neighbors` and `explored` hold up to `n` items -> `O(n)`
+
 Thoughts: there are definitely some ways to improve memory usage.
 
 ## Results (Python 3)

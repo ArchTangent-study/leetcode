@@ -33,7 +33,7 @@ def addContiguousLand(cx: int, cy: int, grid: List[List[str]], explored: set):
         explored.add((x,y))
         if not inBounds(x, y, xdims, ydims):
             continue
-        # If neighbor is land, check its U/D/L/R/ neighbors for contiguous land
+        # If neighbor is land, check its U/D/L/R neighbors for contiguous land
         if grid[y][x] == "1":
             neighbors.append((x, y-1))
             neighbors.append((x, y+1))

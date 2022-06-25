@@ -26,11 +26,34 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Empty graph (no nodes)
+- Single item in graph
+- Ensuring all connections are between *cloned* nodes (new `Node` instances)
+
+Approaches:
+- BFS
+- DFS
 
 ## Procedure
 
-### Method 1
+### Method 1: Breadth First Search
+
+Key Idea: only create connections between `Node`s that have been cloned.
+
+Big Picture:
+1. Account for empty graph by returning `None` if starting `node` is `None`
+2. Create `cloned` map of `{ node.val, Node }` value, clone pairs
+3. Create `nodes_to_clone` queue of `neighbors` of the original `node`
+4. While there are `Nodes` in `nodes_to_clone`, get `current` `Node` and:
+    - clone `Node` if not already cloned
+    - create two-way connection between `current` and any of its *already cloned* neighbors
+    - for any neighbor that *isn't* cloned, add it to `nodes_to_clone` to be handled later
+5. Return the *clone* of the first `Node` (from the `cloned` map).
+
+Complexity:
+- Time: clone each vertex once, create bi-directional connection once -> `O(E+V)`
+- Space: At most `(E+V)` edges + vertices in map and queue -> `O(E+V)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 78 ms, 14.4 MB (10.74%, 77.06%)
