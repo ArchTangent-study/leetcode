@@ -17,12 +17,35 @@ Constraints:
 
 ## Thought Process
 
+Can use a similar approach as used in *Number of Islands* [LC200](https://leetcode.com/problems/number-of-islands/)
+
 Edge Cases / Caveats / Pitfalls:
+- No grid -> N/A as per constraints
+- No islands -> return `0`
+- Same-size islands
+
+Approaches:
+- Breadth-First Search
+- Depth-First Search
 
 ## Procedure
 
-### Method 1
+### Method 1: Breadth-First Search
+
+Big Picture:
+1. Iterate over unexplored tiles in `grid`
+2. If a tile is land, perform `BFS` with that tile:
+    - collect and count all contiguous land tiles (including starting tile)
+    - return the contiguous count (`area`)
+3. Compare the `area` from `BFS` with `highest_area` found so far, and keep maximum
+4. Once entire `grid` traversed, return `highest_area`
+
+Thoughts:  this could be made faster by using the same `deque` (queue) repeatedly, rather than creating a new one every time a new landmass is found.
+
+Complexity:
+- Time: explore each tile only once -> `O(m * n)`
+- Space: a `set` and `queue` holding at worst `m x n` tiles -> `O(m * n)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 246 ms, 14.5 MB (29.88%, 79.11%)
