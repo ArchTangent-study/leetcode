@@ -19,12 +19,41 @@ Constraints:
 
 ## Thought Process
 
+Ocean-touching tiles are on the edges of the map (`x=0, y=0, x=xdims, y=ydims`).
+
 Edge Cases / Caveats / Pitfalls:
+- Empty heights -> N/A as per constraints
+- Same height tiles
+- Channels
+
+Approaches:
+- BFS
+- DFS: recursively report whether a given node touches `PAC/ATL` tiles
+- Start from corners and work up: `NE` and `SW` corners already flow into both oceans, so start from there and work up
+- Start from the *highest points*: they're the most likely to have downflow
+- Start from the *coasts*: return values that touch both.
 
 ## Procedure
 
-### Method 1
+### Method 1: Bottom-Up Breadth-First Search
+
+Key Idea: find the intersection of all tiles that touch both coasts.
+
+Big Picture:
+1. Gather all Atlantic coast tiles in an `atlantic` set
+2. Gather all Pacific coast tiles in a `pacific` set
+3. For each tile on ATL coast, do a `BFS`, adding all neighbors that are *equal to or higher* than current tile.  Add those tiles to the `atlantic` set.
+4. For each tile on PAC coast, do a `BFS`, adding all neighbors that are *equal to or higher* than current tile.  Add those tiles to the `pacific` set.
+5. Return the intersection of the `atlantic` and `pacific` sets as a list of `[row, col]` coordinates.
+
+Techniques:
+- BFS
+- Bottom-Up (working backwards)
+
+Complexity:
+- Time: Two breadth-first searches -> `O(2n)` -> `O(n)`
+- Space: Atlantic and Pacific sets, queue -> `O(3n)` -> `O(n)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 255 ms, 17.7 MB (**99.7%**, 34.87%)
