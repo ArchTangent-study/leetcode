@@ -2,6 +2,7 @@ from typing import List
 
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
+        """Iterative approach that mutates list in place."""
         # Cost at each step is minimum of (step-1, step-2)        
         final_step = len(cost)
         

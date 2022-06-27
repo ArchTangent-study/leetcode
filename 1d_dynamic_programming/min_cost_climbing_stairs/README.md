@@ -85,6 +85,8 @@ return 4
 
 ### Method 1: Min Cost Moving Window
 
+*Note:* this mutates the existing list *in-place*.  May not be desired in some cases.
+
 Use *dynamic programming* to get the minimum of the previous two steps (`i-1`, `i-2`), and add that minimum to the current step's cost.  Then, move to the next step and perform the same calculation.  
 
 This *caches* (using *memoization*) the lowest previous step cost within each step, allowing the calculation to be done in a single pass.
@@ -93,6 +95,16 @@ Complexity:
 - Time: `O(n)`
 - Space: `O(1)`
 
+### Method 2: Iterative DP
+
+Works similar to method 1, except it doesn't mutates the `cost` list in-place.  Instead, it stores and updates `step_cost`, `one_back` and `two_back` variables as the list is traversed.
+
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**: 62 ms, 14.1 MB (84.86%, 45.77%)
+
+**Method 2**: 82 ms, 14.1 MB (58.86%, 24.57%)
