@@ -15,7 +15,57 @@ Constraints:
 Edge Cases / Caveats / Pitfalls:
 - `n < 1`: N/A as per constraints
 
-## Visualization
+Key Idea: the number of step combinations for `number` is equal to sum of those of `number - 1` and `number - 2` combined.
+
+## Procedure
+
+### Method 1: List Cache
+
+Examples:
+- The # of unique combinations for `3` is equal to those of `2` plus those of `1`.
+- The # of unique combinations for `4` is equal to those of `3` plus those of `2`.
+- The # of unique combinations for `5` is equal to those of `4` plus those of `3`.
+
+This can be converted into an algorithm, using a hashmap that *caches* the previous values.
+
+Complexity:
+- Time: traverse each number from `1` to `n` once -> `O(n)`
+- Space: store one number from `1` to `n` -> `O(n)`
+
+### Method 2: Hash Cache
+
+Similar to method 1, but using a hashmap instead.
+
+Complexity:
+- Time: traverse each number from `1` to `n` once -> `O(n)`
+- Space: store one number from `1` to `n` -> `O(n)`
+
+### Method 3: Iterative Sum
+
+Visualization:
+```
+n     | 3   4   5   6   
+------|--------------
+num-1 | 2   3   5   8
+num-2 | 1   2   3   5
+result| 3   5   8  13
+
+```
+For every `n` greater than `2`, each `result` is equal to sum of results for `(n-1)` and `(n-2)`.
+
+For every next `n`:
+    - the `n-1` is equal to the previous `result`
+    - the `n-2` is equal to the previous `n-1`
+
+This can be converted into an algorithm *without* using a hashmap.
+
+Speed: this was *incredibly* fast and efficient (**94%**, **96%**).
+
+Complexity:
+- Time: traverse each number from `1` to `n` once -> `O(n)`
+- Space: same storage no matter the value of `n` -> `O(1)`
+
+### Failed Method 1: Left/Right Sum w/Hashing
 
 The first `5` numbers can be pictured as follows:
 ```
@@ -26,9 +76,6 @@ n   ct   arrangments
 4   5   1,1,1,1     2,1,1       1,1,2     1,2,1     
 5   8   1,1,1,1,1   2,1,1,1   1,1,1,2   1,1,2,1   1,2,1,1,  2,1,2   2,2,1   1,2,2
 ```
-## Procedure
-
-### Method 1: Left/Right Append w/Hashing (Failed - Memory Limit Exceeded)
 
 *Note*: this failed, but is useful because (a) the logic is sound and (b) it provides the correct answers.
 
@@ -41,55 +88,25 @@ Looking at the visualization above, some patterns begin to emerge:
 
 This allows for an approach using `list`s and `set`s, that fails only due to using too much memory.  Perhaps there's a better way?
 
-### Method 2: Hash Cache
+### Failed Method 2: Recursive Sum
 
-There's a simpler pattern found in the above visualization:  the number of step combinations for `number` is equal to sum of those of `number - 1` and `number - 2` combined.
+Similar to method 3, but uses recursion.
 
-Examples:
-- The # of unique combinations for `3` is equal to those of `2` plus those of `1`.
-- The # of unique combinations for `4` is equal to those of `3` plus those of `2`.
-- The # of unique combinations for `5` is equal to those of `4` plus those of `3`.
-
-This can be converted into an algorithm, using a hashmap that *caches* the previous values.
-
-### Method 3: Dynamic Sum
-
-Another visualization:
-```
-n     | 3   4   5   6   
-------|--------------
-num-1 | 2   3   5   8
-num-2 | 1   2   3   5
-result| 3   5   8  13
-
-```
-An even better visualization using a [decision tree](https://en.wikipedia.org/wiki/Decision_tree):
-```
-                        0
-             1                     2
-        2         3           3          4
-     3     4   4     5     4     5    5     6
-   4   5 5   5           5 
- 5  
-```
-
-For every `n` greater than `2`, each `result` is equal to sum of results for `(n-1)` and `(n-2)`.
-
-For every next `n`:
-    - the `n-1` is equal to the previous `result`
-    - the `n-2` is equal to the previous `n-1`
-
-This can be converted into an algorithm *without* using a hashmap.
-
-Speed: this was *incredibly* fast and efficient (**94%**, **96%**), by far the best of the three solutions.
+Complexity:
+- Time: traverse each number from `1` to `n` once -> `O(n)`
+- Space: same storage no matter the value of `n` -> `O(1)`
 
 ## Results (Python 3)
 
-**Method 1**:  Failed - Memory Limit Exceeded
+**Method 1**:  26 ms, 13.8 MB (**97.4%**, **95.96%**)
 
 **Method 2**:  49 ms, 13.9 MB (28.16%, 12.17%)
 
-**Method 3**:  27 ms, 13.7 MB (94.89%, 96.62%)
+**Method 3**:  27 ms, 13.7 MB (**94.89%**, **96.62%**)
+
+**Failed Method 1**:  Failed - Memory Limit Exceeded
+
+**Failed Method 2**:  Failed - Memory Limit Exceeded
 
 ## Pitfalls and Lessons Learned
 1. There's always a pattern:  once you visualize a pattern, the solution becomes far more obvious.
