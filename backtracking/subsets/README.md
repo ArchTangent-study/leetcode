@@ -36,7 +36,7 @@ Complexity:
 Visualization:
 ```
 ix 0 (1)                   [1]                             []
-ix 1 (2)            [1,2]         [1]               [2]             []
+ix 1 (2)           [1,2]          [1]               [2]             []
 ix 2 (3)    [1,2,3]        [1,2]       [1]  [2,3]           [2]             []
 ix 3                    (end - append all individual subsets to answer)
 ```
@@ -46,7 +46,7 @@ Big picture:
     - `left`: `number` at `index` in `nums` is merged into given `subset`
     - `right`: no merge - copy of `subset` is passed on unchanged
 2. Perform Depth-First Search (DFS) on both the `left` and `right` side, increasing `index` by `1` each time.
-3. When `index` goes out of bounds, 
+3. When `index` goes out of bounds, add all individual subset to the `answer`.
 
 Complexity:
 - Time: `O(2ⁿ)`
