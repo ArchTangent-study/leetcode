@@ -36,17 +36,25 @@ candidates = [3,5,8]; target = 11
     [3,5,8]         inclusive pass for 3: counted from 1 to (11/3) = 3 times
                       5 is counted from 0 to (11/5) = 2 times (optional pass)
                       8 is counted from 0 to (11/8) = 1 times (optional pass)
-                    add all combinations that equal `target` and include `3`
+                    adds all combinations that:
+                        - equal `target`
+                        - include `3`
        v
     [3,5,8]         inclusive pass for 5: counted from 1 to (11/5) = 2 times
                       3 is NOT INCLUDED - already had its inclusive pass
                       8 is counted from 0 to (11/8) = 1 times (optional pass)
-                     add all combinations that equal `target` and include `5`
+                    adds all combinations that:
+                        - equal `target`
+                        - include `5`
+                        - exclude `3`
          v
-    [3,5,8]         inclusive pass for 8: counted from 1 to (11/3) = 3 times
+    [3,5,8]         inclusive pass for 8: counted from 1 to (11/8) = 1 times
                       3 is NOT INCLUDED - already had its inclusive pass
                       5 is NOT INCLUDED - already had its inclusive pass
-                     all combinations that equal `target` and include `8`
+                    adds all combinations that:
+                        - equal `target`
+                        - include `8`
+                        - exclude `3` and `5`
 ```
 
 Big Picture: each `candidate` is subject to two passes:
