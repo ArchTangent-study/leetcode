@@ -45,6 +45,43 @@ Complexity:
 Where:
 - `n` is `len(nums)`
 
+### Method 2: Dynamic Programing w/Index Insertion
+
+Key Idea: use previously-calculated permutations to build the next permutations in succession.
+
+Visualization:
+```
+    1 num   2 nums  3 nums  4 nums
+        1     12     312    4312   
+              21     321    4321
+                     132    4132
+                     231    4231
+                     123    4123
+                     213    4213
+                            3412
+                            3421
+                            1432
+                            2431
+                            1423
+                            2413
+                            ... etc
+```
+Big Picture:
+1. Iterate over every `number` in `nums`
+2. Iterate over every previously-calculated permutation in `answer`
+3. For every possible index in which `number` could be inserted, insert `number` into a copy of the previously-calculated permutation.
+4. Add the copy (with inserted `number`) to the `staging` list
+5. Once all indexes for `number` have been exhausted, clear `answer` and add new permuations from `staging` area to answer
+6. Continue until all `number`s have been checked.
+7. Return `answer`
+
+Complexity:
+- Time: explore `n!` solutions -> `O(n!)`
+- Space: store all possible permuations so far in `staging` list -> `O(n! * n)`
+
+Where:
+- `n` is `len(nums)`
+
 ### Python Warning
 
 Be careful when initilazing zeroized lists in Python!
@@ -76,3 +113,5 @@ Do this instead:
 ## Results (Python 3)
 
 **Method 1**: 70 ms, 14.1 MB (30.03%, 56.74%)
+
+**Method 1**: 63 ms, 14.1 MB (44.50%, 56.74%)
