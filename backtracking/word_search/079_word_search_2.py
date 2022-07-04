@@ -2,11 +2,12 @@ from typing import List
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        """DFS with preliminary filtering."""
+        """DFS with preliminary filtering and early exit."""
         last_row, last_col = len(board) - 1, len(board[0]) - 1
         first_letter = word[0]
         last_letter_index = len(word) - 1
-        word_letters = set(word)
+        # Count each letter in word, decrementing for each time found in board
+        word_letters = { letter: word.count(letter) for letter in word }
         ignored_tiles = set()
         start_tiles = []
 
@@ -46,9 +47,16 @@ class Solution:
                 if tile not in word_letters:
                     ignored_tiles.add((row, col))
                     continue
+                # Decrement letter count
+                word_letters[tile] -= 1
                 # Add to list to be checked in search pass
                 if tile == first_letter:
                     start_tiles.append((row, col))
+
+        # Early exit - stop if board doesn't have enough of word's letters
+        for letter_count in word_letters.values():
+            if letter_count > 0:
+                return False
 
         # Search pass
         # NOTE: start from depth 0, first letter, at tile's coords
@@ -58,3 +66,4 @@ class Solution:
                 return True
 
         return False
+        

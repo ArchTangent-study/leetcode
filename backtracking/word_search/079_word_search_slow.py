@@ -45,6 +45,7 @@ class Solution:
                 # Filter letters
                 if tile not in word_letters:
                     ignored_tiles.add((row, col))
+                    continue
                 # If tile starts the word, try DFS starting from that letter
                 if tile == first_letter:
                     # NOTE: start from depth 0, first letter, at tile's coords

@@ -53,6 +53,15 @@ Where:
 
 ### Method 2: Recursive DFS w/ Preliminary Filtering and Early Exit
 
+Same as Method 1, except: don't even search for the `word` if `board` doesn't have enough letters to contain `word`.  Do this by:
+    - count occurrences of each letter in `word`
+    - decrement letter's count by `1` each time letter is found in `board`
+    - if the count for *any* letter is `>1` after entire `board` is searched, the `word` *cannot* be present in `board` -> return `False` without searching.
+
+This wound up being ***twice as fast*** as Method 1 by avoiding unnecessary searches.
+
 ## Results (Python 3)
 
 **Method 1**: 5444 ms, 13.9 MB (81.26%, 50.67%)
+
+**Method 2**: 2427 ms, 14.1 MB (**95.33%**, 12.16%)
