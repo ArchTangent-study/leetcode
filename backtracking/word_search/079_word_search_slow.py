@@ -1,14 +1,15 @@
+# This version got 5.02%, 12.23% time and space percentiles.
+# Uses filtering, but only from the top down. Need to filter entire board first.
 from typing import List
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        """DFS with preliminary filtering."""
+        """DFS starting from first letter in word."""
         last_row, last_col = len(board) - 1, len(board[0]) - 1
         first_letter = word[0]
         last_letter_index = len(word) - 1
         word_letters = set(word)
         ignored_tiles = set()
-        start_tiles = []
 
         def dfs(coords, letter_ix, explored) -> bool:
             nonlocal word
@@ -39,21 +40,16 @@ class Solution:
 
             return found_word
 
-        # Filter pass
         for row, tiles in enumerate(board):
             for col, tile in enumerate(tiles):
                 # Filter letters
                 if tile not in word_letters:
                     ignored_tiles.add((row, col))
-                # Add to list to be checked in search pass
+                # If tile starts the word, try DFS starting from that letter
                 if tile == first_letter:
-                    start_tiles.append((row, col))
-
-        # Search pass
-        # NOTE: start from depth 0, first letter, at tile's coords
-        for coords in start_tiles:
-            found = dfs(coords, 0, set())
-            if found:
-                return True
+                    # NOTE: start from depth 0, first letter, at tile's coords
+                    found = dfs((row, col), 0, set())
+                    if found:
+                        return True
 
         return False
