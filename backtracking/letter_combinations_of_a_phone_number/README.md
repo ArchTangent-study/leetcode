@@ -14,12 +14,22 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
-- `1` doesn't map to a letterr.
+- `1` doesn't map to a letter.
+- Same digit repeated (not an issue since this is a combination)
 
 ## Procedure
 
-### Method 1
+### Method 1: Iteration
+
+Key Ideas:
+- Early exit if `digits` is empty
+- Store `map` of `{ digit : chars_in_digit }` for easy access
+- Use temporary arrays to update existing `answer` in-place
+
+Complexity:
+- Time: max of `4` chars per `n` in digit, traversed `n` times -> `O(n * 4ⁿ)`
+- Space:  answer stored in `temp` list before added to answer -> `O(n * 4ⁿ)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 36 ms, 14.0 MB (79.25%, 29.91%)
