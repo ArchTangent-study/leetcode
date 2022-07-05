@@ -60,6 +60,14 @@ Same as Method 1, except: don't even search for the `word` if `board` doesn't ha
 
 This wound up being ***twice as fast*** as Method 1 by avoiding unnecessary searches.
 
+Complexity:
+- Time: four directional search, no tiles filtered -> `O(4ⁿ)` (???)
+- Space: sets to hold all `word` letters and `ignored` tiles -> `O(w + n)`
+
+Where:
+- `w` is `word` length
+- `n` is the number of `tiles` in `board` (rows * columns)
+
 ## Results (Python 3)
 
 **Method 1**: 5444 ms, 13.9 MB (81.26%, 50.67%)
