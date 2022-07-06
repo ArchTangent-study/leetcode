@@ -32,6 +32,7 @@ Key Steps:
 
 Complexity:
 - Time: `O(n)`
+- Space: `O(1)`
 
 ### Method 2: Shifting Iterator
 
@@ -41,6 +42,7 @@ Key Idea: movesthe `buy_day` to the `sell_day` whenever the price at `sell_day` 
 
 Complexity:
 - Time: `O(n)`
+- Space: `O(1)`
 
 ## Results (Python 3)
 

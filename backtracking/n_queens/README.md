@@ -28,8 +28,26 @@ Ideas:
 
 ## Procedure
 
-### Method 1
+### Method 1: Recursive DFS w/Backtracking
+
+Key Idea: only one Queen is allowed per row (and column)!
+
+Big Picture:
+1. Start with a `board` w/Queen in each `col` of `row 0`, for every `col` in `n`
+    - `board` is a list of `(row, col)` coordinates of placed Queens
+2. Recursively place new Queens in each `col` of next `row`, checking if they can be placed
+    - if Queen can be placed, add Queens' `(row, col)` to `board`
+    - if it's the last `row`, add the `board` to a preliminary answer list and break from recursion
+    - otherwise, continue recursively in next `row`
+3. Convert all valid `board`s into output format (with strings)
+4. Return answer
+
+Complexity:
+- Time: `O(n²)` (?)
+- Space: list of `n` prelimnary answers w/`n` queens each -> `O(n²)`
+
+Thoughts:  this can save space by converting a `board` directly into proper answer format without using an intermediate list to store valid `board`s.
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 98 ms, 14.7 MB (49.91%, 6.03%)
