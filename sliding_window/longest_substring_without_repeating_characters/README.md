@@ -59,6 +59,16 @@ return 3
 
 Complexity:
 - Time: every char visited once -> `O(n)`
+- Space: `dict` holds *known maximum* number of possible characters -> `O(1)`
+
+### Method 3: Two-Pointer Sliding Window w/Set
+
+Similar to Method 2, but differs by:
+- using two pointers instead of iteration
+- using a `set` instead of a `dict`
+
+Complexity:
+- Time: chars visited at worst 2x (e.g. `"ababab"`) -> `O(2n)` -> `O(n)`
 - Space: `set` holds *known maximum* number of possible characters -> `O(1)`
 
 ## Results (Python 3)
@@ -66,3 +76,5 @@ Complexity:
 **Method 1**: 734 ms, 14.1 MB (10.92%, 49.44%)
 
 **Method 2**: 550 ms, 14.1 MB (13.91%, 49.47%)
+
+**Method 3**: 71 ms, 14.1 MB (**84.57%**, 49.47%)
