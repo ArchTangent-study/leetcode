@@ -16,6 +16,7 @@ Constraints:
 Edge Cases / Caveats / Pitfalls:
 - Empty string: return `0`
 - String of length `1`: return `1`
+- Words with multiple duplicate characters
 
 ## Procedure
 
@@ -35,9 +36,33 @@ Big Picture:
 6. Return `max_count`
 
 Complexity:
-- Time: every char visited twice in worst case, e.g. `"sasasasa"` -> `O(2n)` -> `O(n)`
+- Time: every char visited `1 + 2 + 3 + ... n` times (e.g. `"abcdef"`) -> `O(n²)`
+- Space: `set` holds *known maximum* number of possible characters -> `O(1)`
+
+### Method 2: Sliding Window w/Hashmap
+
+Key Idea: use hashmap to (a) find repeat characters and (b) store indexes to track the start of the next substring to be tested.
+
+Visualization for `"dvdf"`:
+```python
+ char_map                   substring  start_ix  max_length
+{ "d": 0 }                    "d"         0         0
+{ "d": 0, "v": 1 }            "dv"        0         0
+{ "v": 1, "d": 2 }            "vd"        1         2
+{ "v": 1, "d": 2, "f": 3 }    "vdf"       1         2
+
+end of iteration
+return max(max_length, len(s) - start_ix)
+return max(2, 4 - 1)
+return 3
+```
+
+Complexity:
+- Time: every char visited once -> `O(n)`
 - Space: `set` holds *known maximum* number of possible characters -> `O(1)`
 
 ## Results (Python 3)
 
 **Method 1**: 734 ms, 14.1 MB (10.92%, 49.44%)
+
+**Method 2**: 550 ms, 14.1 MB (13.91%, 49.47%)
