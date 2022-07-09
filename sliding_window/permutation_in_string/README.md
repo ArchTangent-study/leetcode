@@ -50,6 +50,26 @@ Complexity:
 
 *Note*: this can be made faster by not constructing a new `dict` for each window.  Instead, re-use the same `dict` and update the `count` of each letter *leaving* and *entering* the window.
 
+### Method 2: Two Pointers Sliding Window w/Dict Counter Add/Remove
+
+This was *significantly* faster than Method 1.
+
+Big Picture: works similar to Method 1, except:
+1. New dictionaries are not created on every window; instead a single `window_chars` dictionary is re-used.
+2. `window_chars` increments count of char at right pointer `p2` before comparison
+3. `window_chars` compared against `char : count` pairs in `target_chars` dictionary
+4. `window_chars` decrements count of char at left pointer `p2` after comparison
+
+Complexity:
+- Time: check `n` (in `s2`) windows with up to `26` pairs -> `O(26n)` -> `O(n)`
+- Space: up to `26` pairs (see constraints) in each dictionary -> `O(1)`
+
+*Note*: this can be made faster and use less space by using a single `dict` of *remaining characters needed*, representing the count of chars in `s1`.
+
 ## Results (Python 3)
 
-**Method 1**:  ms,  MB (%, %)
+**Method 1**: 6094 ms, 14 MB (6.81%, 68.12%)
+
+**Method 2**: 220 ms, 14 MB (34.09%, 31.41%)
+
+**Method 3**:  ms,  MB (%, %)
