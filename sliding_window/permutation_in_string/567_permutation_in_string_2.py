@@ -1,6 +1,6 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        """Two Pointer Sliding Window w/Dict Counter (Improved)"""
+        """Two Pointer Sliding Window w/Dict Counter Add/Remove"""
         target_chars = {}
         for char in s1:
             if char in target_chars:

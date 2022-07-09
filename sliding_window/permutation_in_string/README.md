@@ -20,7 +20,7 @@ Edge Cases / Caveats / Pitfalls:
 
 ## Procedure
 
-### Method 1: Two Pointers Sliding Window w/Dict Counter
+### Method 1: Two Pointer Sliding Window w/Dict Counter
 
 Key Idea: each permuation of `s1` can be found by *matching the* ***count*** *of each letter in the string*.  This is the same as working with *anagrams*.
 
@@ -50,7 +50,7 @@ Complexity:
 
 *Note*: this can be made faster by not constructing a new `dict` for each window.  Instead, re-use the same `dict` and update the `count` of each letter *leaving* and *entering* the window.
 
-### Method 2: Two Pointers Sliding Window w/Dict Counter Add/Remove
+### Method 2: Two Pointer Sliding Window w/Dict Counter Add/Remove
 
 This was *significantly* faster than Method 1.
 
@@ -66,10 +66,33 @@ Complexity:
 
 *Note*: this can be made faster and use less space by using a single `dict` of *remaining characters needed*, representing the count of chars in `s1`.
 
+### Method 3: Two Pointer Sliding Window w/Chars Remaining Map
+
+This was about *2x* faster than Method 2.
+
+Key Idea: only need to check the characters *needed to be found*.  For `s1 = "abb"` set `chars_needed = {"a": 1, "b": 2}`.  Once all chars are set to `0`, the conditions have been met.  This saves the need for an extra dictionary.
+
+Visualization:
+```python
+s1 = "oil"; s2 = "foolish"; needed = {'o': 1, 'i': 1, "l": 1}
+
+"foolish"    Needed     
+ ^ ^         'o': -1, 'i': 1, "l": 1
+  ^ ^        'o': -1, 'i': 1, "l": 0
+   ^ ^       'o':  0, 'i': 0, "l": 0   <- found
+
+return True
+```
+Complexity:
+- Time: check `n` (in `s2`) windows with up to `26` pairs -> `O(26n)` -> `O(n)`
+- Space: up to `26` pairs (see constraints) in each dictionary -> `O(1)`
+
+*Note*: this can be made faster by only checking for a match when one of the target characters is reduced to `0`.
+
 ## Results (Python 3)
 
-**Method 1**: 6094 ms, 14 MB (6.81%, 68.12%)
+**Method 1**: 6094 ms, 14.0 MB (6.81%, 68.12%)
 
-**Method 2**: 220 ms, 14 MB (34.09%, 31.41%)
+**Method 2**: 220 ms, 14.0 MB (34.09%, 31.41%)
 
-**Method 3**:  ms,  MB (%, %)
+**Method 3**: 107 ms, 14.0 MB (67.60%, 68.12%)
