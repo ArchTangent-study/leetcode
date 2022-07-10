@@ -48,17 +48,17 @@ Visualization
 s = "ABEECEBA"; t = "ABC"; chars_required = { "A": 1, "B": 2, "C": 3 }
 
 ABEECEBA       A  B  C  
-A              0  1  1   
+A              0  1  1  Start Phase 1
 AB             0  0  1 
 ABE            0  0  1
 ABEE           0  0  1
-ABEEC          0  0  0  Found first answer "ABEEC". Shift p1 right.
+ABEEC          0  0  0  Answer 1 "ABEEC" found. End Phase 1. Shift p1 right.
  BEEC          1  0  0 
   EECE         1  1  0 
    ECEB        1  0  0 
-    CEBA       0  0  0  Found second answer "CEBA". Shift p1 right.
+    CEBA       0  0  0  Answer 2 "CEBA" found. Shift p1 right.
      EBA       0  0  1  
-      BA       0  0  1  p2 - p1 span of 2, < len(t).  Stop
+      BA       0  0  1  p2 - p1 span of 2 < len(t). Stop
 
 return "CEBA"
 ```
@@ -79,8 +79,41 @@ Complexity:
 - Time: for each of `n` chars in `s`, check up to `t` (max `52`)  chars -> `O(52n)` -> `O(n)`
 - Space: up to `t` (max `52`) chars in `dict` -> `O(1)`
 
-*Note*: this can be made faster by only checking for a new valid answer (by checking that the `count` of each `char_required < 1`) when the `count` rises above `0` when sliding left pointer `p1` to the right.
+### Method 2: Two Pointer Sliding Window - Two Phase (Improved)
+
+Key Idea: same as Approach 1, but when valid answer found:
+- truncates any duplicates of the `char` at left pointer `p1` as long as the answer remains valid.
+- updates the answer each time
+
+Visualization
+```python
+s = "AAABBCDD"; t = "ABCDD"; chars_required = { "A": 1, "B": 1, "C": 1, "D": 2 }
+
+AAABBCDD       A  B  C  D  
+A              0  1  1  2  Start Phase 1
+AA            -1  1  1  2   
+AAA           -2  1  1  2   
+AAAB          -2  0  1  2   
+AAABB         -2 -1  1  2   
+AAABBC        -2 -1  0  2   
+AAABBCD       -2 -1  0  1   
+AAABBCDD      -2 -1  0  0  Answer 1 found; End Phase 1
+ AABBCDD      -1 -1  0  0  Answer 2 found. Shift p1 since required "A" will be < 0
+  ABBCDD       0 -1  0  0  Answer 3 found. Shift p1 since required "A" will be < 0
+   BBCDD       1 -1  0  0  
+    BCDD       1 -1  0  0  p2 - p1 span of 2 < len(t). Stop
+
+return "ABBCDD"
+```
+
+Complexity:
+- Time: for each of `n` chars in `s`, check up to `t` (max `52`)  chars -> `O(52n)` -> `O(n)`
+- Space: up to `t` (max `52`) chars in `dict` -> `O(1)`
+
+*Note*: this can be made faster by only checking for new answers when the upcoming character (`p2_next = s[p2+1]`) is in `chars_required`.  *Lookahead* allows unnecessary checks to be skipped.
 
 ## Results (Python 3)
 
-**Method 1**: 29.87 ms, 14.6 MB (29.87%, **82.88%**)
+**Method 1**: 229 ms, 14.6 MB (29.87%, **82.88%**)
+
+**Method 2**: 147 ms, 14.8 MB (62.53%, 35.58%)

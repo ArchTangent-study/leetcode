@@ -2,7 +2,7 @@ from collections import defaultdict
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        """Sliding Window.  Valid answers have required character count of 0 or less."""
+        """Sliding Window - Two Phase."""
         # Last index that the right pointer can touch
         last_ix = len(s) - 1
         # Pointer distance above which p2-p1 must be to contain t. For "aba", min_dist is 1
@@ -23,7 +23,7 @@ class Solution:
                 p2 = i
                 # `s` has an answer - add it, shift p1 to right to shrink window
                 # NOTE: shift p1 by getting char at p1, removing it, then moving p1 up
-                if chars_req[char] <= 0 and all(v < 1 for v in chars_req.values()):
+                if chars_req[char] < 1 and all(v < 1 for v in chars_req.values()):
                     answer = s[p1:p2+1]
                     chars_req[s[p1]] += 1
                     p1 += 1
