@@ -44,6 +44,10 @@ Edge Cases / Caveats / Pitfalls:
 ## Results (Python 3)
 
 **Method 1**:  ms, MB (%, %)
+
+Complexity:
+- Time:
+- Space: 
 """
     difficulty = diff.title()
     header = f"# {name} ([LC{number:03}]())\nDifficulty: {difficulty}"
