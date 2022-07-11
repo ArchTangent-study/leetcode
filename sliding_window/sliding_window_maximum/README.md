@@ -15,11 +15,77 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- OOB indexing
+- Proper indexing for slices vs direct indexing
+- Tracking index of maximum value within moving window
+- Constantly decreasing numbers, e.g. `[8,7,6,5,4,3,2,1]`
+- Window `k` larger than `nums` list -> N/A as per constraints
+- Incoming number equal to current max value -> update w/index of incoming number
+- Current window maximum falling out of window -> need to replace w/max currently in window
+
+Optimizations:
+- Tracking index of current maximum within window: keeps from having to check the entire window each time (until it falls out of window, at least)
+- Tracking a *next highest* value, and its index: when getting the higest value in a window, track the second highest value that is to the right of the highest.  May be useful in case the current maximum falls out of the window w/no replacement.
+
+Worst-Case Scenarios:
+- Constantly-decreasing numbers
+- Large windows (large `k`)
 
 ## Procedure
 
-### Method 1
+### Method 1: Sliding Window with (val, ix) Max Heap
+
+Key Idea: use a `(value, index)` max heap, using the `index` of the associated `value` to see if the `value` is within the bounds of the current `p1` to `p2` window.
+- If `index` is in bounds (`index >= p1`), `value` is the maximum of the window.
+- If `index` is *not* in bounds (`index < p1`), remove `value` from heap and try again.
+
+Visualization 1 (worst space case)
+```Python
+nums = [1,2,3,4,5,6,7,8]; k = 4; expected = [4,5,6,7,8]
+
+window      heap        answer 
+1234        1234        4
+ 2345       12345       45
+  3456      123456      456
+   4567     1234567     4567
+     5678   12345678    45678
+
+return [4,5,6,7,8]
+```
+Note how the heap keeps increasing in size -> `O(n)` worst case space complexity
+
+Visualization 2 (best space case)
+```Python
+nums = [8,7,6,5,4,3,2,1]; k = 3; expected = [8,7,6,5,4,3]
+
+window      heap        answer 
+876         876         8
+ 765        765         87
+  654       654         876
+   543      543         8765
+    432     432         87654
+     321    321         876543
+
+return [4,5,6,7,8]
+```
+Note how the heap stays the same size -> `O(k)` best case space complexity
+
+Complexity:
+- Time: `O(k log k)` initial heapsort, `O(log k)` heap insert for each `n` in `nums` -> `O(n log k)`
+- Space: in worst case (increasing list), `heap` holds all `n` numbers -> `O(n)`
+
+### Failed Method: Sliding Window w/Early Exit
+
+*Note:* this way failed on *Time Limit Exceeded*, but actually gets the correct answer.  Stored under `sliding_window_maximum_slow.py` for reference purposes.
+
+Advantages:
+- Simple
+- Constant space
+
+Complexity:
+- Time: `n - k` vals for each `n`, worst case when `k = n/2` -> `O((n-k)*k)` -> `O(k²)`
+- Space: constant space -> `O(1)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms,  MB (%, %)
+**Method 1**: 3562 ms, 39.6 MB (14.44%, 5.31%)
