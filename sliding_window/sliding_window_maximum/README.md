@@ -98,6 +98,35 @@ Complexity:
 - Time: `O(log k)` heap insert for each `n` in `nums` -> `O(n log k)`
 - Space: in worst case (decreasing list), `heap` holds `k` numbers -> `O(k)`
 
+### Method 3: Sliding Window with Deque
+
+Big Picture:
+1. `highest` is the `(val, ix)` pair at front of the deque
+2. Pop `highest` if the index is out of window (`ix < p1`)
+3. Add `incoming` `(val, ix)` pairs to end of deque
+4. If `incoming` value is >= back value, `pop()` back value. Continue as long as `incoming.val > back.val`
+    - if `incoming.val > highest.val`, only `incoming` will remain in queue
+
+Visualization:
+```python
+nums = [3,1,2,6,4,5,7,9,8] ;  k = 3 ; expected = [3,6,6,6,7,9,9]
+
+312645798   Deque       answer      
+312         32          3           add 2 
+ 126        6           36          pop 2, add 6
+  264       64          366         add 4
+   645      65          3666        pop 4, add 5
+    457     7           36667       pop 5, add 7
+     579    9           366679      pop 7, add 9
+      798   98          3666799     add 8
+
+return [3,6,6,6,7,9,9]
+```
+
+Complexity:
+- Time: `O(n)`
+- Space: up to `k` items in deque -> `O(k)`
+
 ### Failed Method: Sliding Window w/Early Exit
 
 *Note:* this way failed on *Time Limit Exceeded*, but actually gets the correct answer.  Stored under `sliding_window_maximum_slow.py` for reference purposes.
@@ -115,3 +144,5 @@ Complexity:
 **Method 1**: 3562 ms, 39.6 MB (14.44%, 5.31%)
 
 **Method 2**: 3218 ms, 35.8 MB (24.73%, 8.43%)
+
+**Method 3**: 2558 ms, 31.1 MB (24.73%, 8.43%)
