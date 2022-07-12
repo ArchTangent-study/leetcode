@@ -89,6 +89,27 @@ Complexity:
 
 *Note*: this can be made faster by only checking for a match when one of the target characters is reduced to `0`.
 
+### Method 4: Two Pointer Sliding Window w/List Counter
+
+Key Idea: use a list of size `26` to store a `count` of characters needed to make an anagram (permutation).  If all counts are `0` at any point after initialization, a permuation exists.
+
+Visualization:
+```Python
+s1 = "ab" ; s2 = "ecdbaccc" ; m = len(s1) = 2 ; n = len(s2)
+
+ecdbaccc      A  B  C  D  E   
+ec          [ 1, 1, 0, 0, 0 ] s1[0] to s1[1] Initialize
+ec          [ 1, 1,-1, 0,-1 ] s2[0] to s2[1] Initialize <- False
+ cd         [ 1, 1,-1,-1,-1 ] s2[2]   add "d"
+ cd         [ 1, 1,-1,-1, 0 ] s2[2-m] rem "e" <- False
+  db        [ 1, 0,-1,-1, 0 ] s2[3]   add "b" 
+  db        [ 1, 0, 0,-1, 0 ] s2[3-m] rem "c" <- False
+   ba       [ 0, 0, 0,-1, 0 ] s2[4]   add "a"
+   ba       [ 0, 0, 0, 0, 0 ] s2[4-m] rem "d" <- True
+
+return True   
+```
+
 ## Results (Python 3)
 
 **Method 1**: 6094 ms, 14.0 MB (6.81%, 68.12%)
@@ -96,3 +117,5 @@ Complexity:
 **Method 2**: 220 ms, 14.0 MB (34.09%, 31.41%)
 
 **Method 3**: 107 ms, 14.0 MB (67.60%, 68.12%)
+
+**Method 4**: 100 ms, 14.0 MB (72.92%, 31.42%)
