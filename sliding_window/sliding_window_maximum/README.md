@@ -74,6 +74,30 @@ Complexity:
 - Time: `O(k log k)` initial heapsort, `O(log k)` heap insert for each `n` in `nums` -> `O(n log k)`
 - Space: in worst case (increasing list), `heap` holds all `n` numbers -> `O(n)`
 
+### Method 2: Sliding Window with (val, ix) Max Heap - Improved
+
+Key Idea: improve performance and space complexity by clearing irrelevant items from the heap.  When an incoming value is the *new high* of the heap, it replaces *all other* values in the heap.  See the *Visualization* below, compared to that of Method 1.
+
+Visualization 1
+```Python
+nums = [1,2,3,4,5,6,7,8]; k = 4; expected = [4,5,6,7,8]
+
+window      heap        answer 
+1234        4           4
+ 2345       5           45
+  3456      6           456
+   4567     7           4567
+     5678   8           45678
+
+return [4,5,6,7,8]
+```
+
+Caveat: when checking for equality (whether `incoming` is the highest in the heap), you need to account for the way Python sorts `tuple`s.  If you have `(-10, 0)` and `(-10, 3)` in the heap, `(-10, 0)` will be at the top of the heap since it's a *min heap* and index `0` is before `3`.  To fix this, use `heap[:] = [(-n, i)]` instead of `del(heap[1:])`
+
+Complexity:
+- Time: `O(log k)` heap insert for each `n` in `nums` -> `O(n log k)`
+- Space: in worst case (decreasing list), `heap` holds `k` numbers -> `O(k)`
+
 ### Failed Method: Sliding Window w/Early Exit
 
 *Note:* this way failed on *Time Limit Exceeded*, but actually gets the correct answer.  Stored under `sliding_window_maximum_slow.py` for reference purposes.
@@ -89,3 +113,5 @@ Complexity:
 ## Results (Python 3)
 
 **Method 1**: 3562 ms, 39.6 MB (14.44%, 5.31%)
+
+**Method 2**: 3218 ms, 35.8 MB (24.73%, 8.43%)

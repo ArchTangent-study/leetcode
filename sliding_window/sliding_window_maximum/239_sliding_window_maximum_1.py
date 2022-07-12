@@ -1,4 +1,4 @@
-from heapq import heapify, heappop, heappush
+from heapq import heappop, heappush
 from typing import List, Tuple
 
 class Solution:
@@ -7,13 +7,12 @@ class Solution:
         answer = []
         p1, p2 = 0, k - 1       # set to k-1 for proper indexing
 
-        # Build initial window of (-n, val) pairs, then heapsort O(n log n)
+        # Build initial window of (-n, val) pairs
         # NOTE: Python's heap is min heap, so need to negate all values for max
         # NOTE: Start with window 1 left of bounds (from indexes -1 to k-2)
-        heap: List[Tuple[int, int]] = [(10001, -1)]
+        heap = []
         for i, n in enumerate(nums[:p2]):
-            heap.append((-n, i))
-        heapify(heap)
+            heappush(heap, (-n, i))
 
         # Perform the following in order:
         # - Get incoming value from right of window (p2), add (-value, p2) to heap
