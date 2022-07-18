@@ -13,6 +13,12 @@ Constraints:
 
 Edge Cases / Caveats / Pitfalls:
 
+Notes:
+- A single bar can count toward the answer
+- The *lowest* included bar is the most limiting
+- area of any set of group of bars is `num_bars * ht_of_lowest_bar`
+- brute force would check every possible combination of bars -> `O(n²)`
+
 ## Procedure
 
 ### Method 1
