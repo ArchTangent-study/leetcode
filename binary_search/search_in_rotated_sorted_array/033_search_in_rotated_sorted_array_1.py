@@ -3,12 +3,11 @@ from typing import List
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         """Bifurcated Binary Search.  Check (a) ascending order (b) target presence."""
-        # Initialize indexes
         left, right = 0, len(nums) - 1
 
         while left <= right:
             middle = (left + right) // 2
-            # Check for answer 
+   
             middle_num = nums[middle]
             if middle_num == target:
                 return middle
