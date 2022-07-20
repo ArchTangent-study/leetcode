@@ -21,11 +21,33 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Performing in `O(log n)` time
 
 ## Procedure
 
-### Method 1
+### Method 1: Bifurcated Binary Search w/Ascension Detection
+
+Key Ideas:
+1. A possibly rotated sorted array will consist of `1` or `2` ascending regions
+2. Once an ascending region is found, we can perform binary search within that region *if* the `target` is possibly contained in that region
+
+Big Picture:
+1. Establish `L,M,R = left, middle, right` pointers
+2. Perform the below steps while `L <= R`
+3. Check `[L,M]` for (a) ascending order and (b) target in bounds
+    - if not ascending order, do nothing
+    - if `target` not within `[L,M]`: shift `L` to `M+1`
+    - if `target` within `[L,M]`: return `binarySearch()` with starting bounds of `[L,M]`
+4. Check `[M,R]` for (a) ascending order and (b) target in bounds
+    - if not ascending order, do nothing
+    - if `target` not within `[M,R]`: shift `R` to `M-1`
+    - if `target` within `[M,R]`: return `binarySearch()` with starting bounds of `[M,R]`
+5. If answer not found, return `-1`
+
+Complexity:
+- Time: eliminate L/R regions, binary search in correct region -> `O(3 log n)` -> `O(log n)`
+- Space: constant extra space -> `O(1)`  
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB ( %, %)
+**Method 1**: 66 ms, 14.2 MB (46.73 %, **90.91%**)
