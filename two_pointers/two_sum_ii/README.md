@@ -21,10 +21,24 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Proper indexing (`1`-indexed)
+- Constant space `O(1)`
+- Only one answer
+- Can only use each element once
+- Multiples of same value, e.g. `[1,2,2,2,3]`
+
+Ideas:
+- Since values are non-decreasing, early exit can be used once a value higher than `target` is found.
 
 ## Procedure
 
-### Method 1
+### Method 1: Two Pointers Naive w/Early Exit
+
+Key Idea: a naive (brute force) two pointers approach with early exit if the `combined` sum is greater than `target`.
+
+Complexity:
+- Time: `O(n²)`
+- Space: `O(1)`
 
 ## Results (Python 3)
 
