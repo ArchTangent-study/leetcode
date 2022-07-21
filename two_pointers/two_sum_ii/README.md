@@ -34,12 +34,48 @@ Ideas:
 
 ### Method 1: Two Pointers Naive w/Early Exit
 
+Note: this gets the right answers, but fails on Time Limit Exceeded
+
 Key Idea: a naive (brute force) two pointers approach with early exit if the `combined` sum is greater than `target`.
 
 Complexity:
 - Time: `O(n²)`
 - Space: `O(1)`
 
+### Method 2: Binary Search
+
+Key Idea: take advantage of the fact that `numbers` is sorted to split the effective search range for the second number in half.
+
+Visualization
+
+Where:
+- `S` is starting index (1st number in sum)
+- `L` and `R` are left/right pointers for binary search
+- `M` is the midpoint of binary search and 2nd number in sum
+
+*Note*: `S` and `L` cannot start at same index!
+```python
+nums = [2,3,15,20,25,30,50] ; target = 28 
+
+ 0  1  2  3  4  5  6    indices
+ 2  3 15 20 25 30 50    nums
+ S  L     M        R    sum = 22 < 28   
+ S           L  M  R    sum = 32 > 28
+ S          LMR         sum = 27 < 28
+ S        R  L          R < L ; move to next S
+    S  L     M     R    sum = 28 = 28 *correct*
+    
+return [S+1, M+1] = [2,5]
+```
+
+Complexity:
+- Time: binary search for each `n` in `numbers` -> `O(n log n)`
+- Space: constant extra space -> `O(1)`
+
+This performed poorly (`~5%`) in the time ranking, so certainly there's a better way!
+
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**:  Failed - Time Limit Exceeded
+
+**Method 2**: 394 ms, 14.9 MB (5.04%, **88.35%**)

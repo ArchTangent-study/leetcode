@@ -1,3 +1,4 @@
+# NOTE: this fails on Time Limit Exceeded
 from typing import List
 
 class Solution:
