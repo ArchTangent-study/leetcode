@@ -44,6 +44,20 @@ Key Steps:
 Thoughts:
 - Python's `str` methods and iterators make this problem pleasant to work with, as long as you're familiar with them.
 
+Complexity:
+- Time: traverse at worst `n // 2 + 1` chars in `s` -> `O(n)`
+- Space: construct a new string -> `O(n)`
+
+### Method 2: Two Pointers w/ Match Case
+
+Key Idea: use `match` statement as a *truth table* to determine how each char at `L` and `R` pointers are handled.
+
+Complexity:
+- Time: traverse at worst `n // 2 + 1` chars in `s` -> `O(n)`
+- Space: constant extra space -> `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**:  69 ms, 14.18 MB (45.15%, 33.62%)
+
+**Method 2**:  122 ms, 14.4 MB (9.86%, 57.28%)

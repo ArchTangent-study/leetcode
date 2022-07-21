@@ -18,6 +18,7 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- `nums1` or `nums2` empty
 
 ## Procedure
 
