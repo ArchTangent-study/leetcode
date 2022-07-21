@@ -74,8 +74,38 @@ Complexity:
 
 This performed poorly (`~5%`) in the time ranking, so certainly there's a better way!
 
+### Method 3: Two Pointer Closing Window
+
+Key Idea: take advantage of sorted order to "shrink" the `L/R` pointer window depending on the `sum` relative to the `target`.
+Visualization
+
+Where:
+- `S` is starting index (1st number in sum)
+- `L` and `R` are left/right pointers for binary search
+- `M` is the midpoint of binary search and 2nd number in sum
+
+*Note*: `S` and `L` cannot start at same index!
+```python
+nums = [2,3,15,20,25,30,50] ; target = 28 
+
+ 0  1  2  3  4  5  6    indices
+ 2  3 15 20 25 30 50    nums
+ L                 R    sum = 52 > 28   
+ L              R       sum = 32 > 28   
+ L           R          sum = 27 < 28 
+    L        R          sum = 28 = 28 *correct*
+    
+return [L+1, R+1] = [2,5]
+```
+
+Complexity:
+- Time: traverse each `n` in `numbers` at most once -> `O(n)`
+- Space: constant extra space -> `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**:  Failed - Time Limit Exceeded
 
 **Method 2**: 394 ms, 14.9 MB (5.04%, **88.35%**)
+
+**Method 3**: 134 ms, 14.9 MB (**92.99%**, **88.35%**)
