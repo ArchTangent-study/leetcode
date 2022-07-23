@@ -27,7 +27,7 @@ Ideas:
 
 ## Procedure
 
-### Method 1: Three Pointers with Two Pointer Closing Window and Sorting
+### Method 1: Three Pointers w/Two Pointer Closing Window, Set Deduplication, and Sorting
 
 Key Ideas:
 - Sort `O(n log n)` in advance to make subsequent calculations faster
@@ -66,6 +66,16 @@ Complexity:
 - Time: for each `L` value, traverse up to `n` numbers with `M` and `R` -> `O(n²)`
 - Space: two sets with up to `n` numbers -> `O(n)`
 
+### Method 2: Three Pointers w/Two Pointer Closing Window, Int Deduplication, and Sorting
+
+Key Idea: same as Method 1, but uses the fact that values are sorted to deduplicate by simply checking if the first/second number is the same as it was in the previous pass.  This saves time and space.
+
+Complexity:
+- Time: for each `L` value, traverse up to `n` numbers with `M` and `R` -> `O(n²)`
+- Space: constant extra space -> `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**: 1462 ms, 18.1 MB (44.71%, 72.14%)
+
+**Method 2**: 1127 ms, 18.0 MB (63.85%, 81.75%)
