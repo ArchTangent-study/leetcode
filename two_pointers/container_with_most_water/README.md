@@ -19,10 +19,24 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Account for both directions
+- Proper area calculation
+
+Ideas:
+- Monotonic stack?  Won't work
+- Two Pointers
 
 ## Procedure
 
 ### Method 1
+
+### Failed Method: Two Pointer Closing Window w/Early Exit
+
+*Note*: this got correct results on all my testing but failed on "Time Limit Exceeded" for input `[*range(10001)] + [*range(10000, -1, -1)]` (a triangular distribution)
+
+Complexity:
+- Time: `O(n²)`
+- Space: `O(1)`
 
 ## Results (Python 3)
 
