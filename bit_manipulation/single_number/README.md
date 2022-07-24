@@ -27,6 +27,10 @@ The principles:
 
 Thus, any duplicates will negate themselves, and the only unpaired value in `nums` will be the answer.
 
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**:  196 ms, 16.8 MB (45.03%, 52.85%)
