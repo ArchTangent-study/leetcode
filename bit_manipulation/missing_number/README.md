@@ -30,6 +30,10 @@ Approach:
 2. Go over every `i` in `n`
 3. If `i` is not in `nums`, return `i`
 
+Complexity:
+- Time: `O(n²)`
+- Space: `O(1)`
+
 ### Method 2: Sorted List
 
 This is **~23x** faster than method 1.
@@ -46,6 +50,10 @@ Approach:
     - if `n != expected`, return `expected`
 4. If all `n` in `nums` are traversed without returning, return `expected`, the length of the list.
 
+Complexity:
+- Time: `O(n log n)`
+- Space: `O(1)`
+
 ### Method 3: Arithmetic Series
 
 This is **~20x** faster than method 1.
@@ -60,6 +68,10 @@ Approach:
 3. Calculate sum of values in `nums`: `sum_of_list`
 4. Return `arithmetic_sum` - `sum_of_list`
 
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
+
 ### Method 4: Bitwise XOR Deduplication
 
 This is **~26x** faster than method 1.
@@ -73,6 +85,10 @@ Approach:
 2. For every `n` in `nums`: `answer ^= n`
 3. For every `n` from `0` to `len(nums) + 1`: `answer ^= n`
 4. Return `answer`
+
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
 
 ## Results (Python 3)
 
