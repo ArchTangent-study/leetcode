@@ -66,6 +66,10 @@ For each `i` from `[0..32)` (integer size):
 Pitfalls:
 - For this to work, you must shift `output` *before* inserting `lsb`.  It makes sense if you draw the process out step-by-step.
 
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
+
 ### Method 2: Bit Insert (Follow-Up)
 
 #### Visualization 2
@@ -111,6 +115,10 @@ For each `i` from `[0..32)` (integer size):
 
 Pitfalls:
 - Note that you have to insert from the `31-i`th postion in `output` (rather than 32).
+
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
 
 ## Results (Python 3)
 
