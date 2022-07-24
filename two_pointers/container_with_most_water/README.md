@@ -28,7 +28,13 @@ Ideas:
 
 ## Procedure
 
-### Method 1
+### Method 1: Two Pointer Closing Window Preserving Highest L/R Value
+
+Improves upon the failed method by shifting `L` or `R` pointer based upon which has the *lower* height.
+
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
 
 ### Failed Method: Two Pointer Closing Window w/Early Exit
 
@@ -40,4 +46,4 @@ Complexity:
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 1240 ms, 27.4 MB (32.45%, 88.20%)
