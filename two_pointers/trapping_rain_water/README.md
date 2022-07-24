@@ -13,6 +13,7 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Completely flat terrain
 
 ## Procedure
 
