@@ -75,7 +75,9 @@ This builds upon the techniques applied in the **Number of 1 Bits** [LC191](http
 
 This is effectively the same problem, but done for a range of numbers instead of a single one.
 
-Time complexity: `O(n log(n))`
+Complexity:
+- Time: `O(n log n)`
+- Space: `O(1)`
 
 ### Method 2: Dynamic Programming Version 1 (Follow-Up)
 
@@ -92,7 +94,9 @@ This can be turned into an algorithm:
 3. For `i = [8..15]`, `bit_count[i]` == `bit_count[i-8]` (shift 8 indexes back, add `1`).
 4. For `i = [16..31]`, `bit_count[i]` == `bit_count[i-16]` (shift 16 indexes back, add `1`).
 
-Time complexity: `O(n)`
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
 
 **Thoughts**: This solution is clearly not ideal, as there's a pattern (*base 2*) that can be used to coalesce the many `for` loops in the solution into a single one.  See **method 3** for a better way.
 
@@ -135,6 +139,10 @@ Other notes:
 - Since `n` is known in advance, you can preallocate the `answer` array to `[0]*n`
 - For any value of `n`, the count for `n` is stored in `answer[n]`
 
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
+
 Thoughts: this was about **40% faster** than method 2, while being more concise.
 
 ### Method 4: Dynamic Programming Refined
@@ -142,7 +150,7 @@ Thoughts: this was about **40% faster** than method 2, while being more concise.
 An attempt to make the above approaches more succinct and easier to understand.
 
 Big Picture:
-- Since `n` is known in advance, you can preallocate the `answer` array to `[0]*n`
+- Since `n` is known in advance, you can preallocate the `answer` array to `[0] * n`
 - The bit count for each `number` in `n` is stored in an index equal to `number`.
 - Each `number`'s bit count is equal to that of `number >> 1`, plus the **sign bit**.
 - Sign bit can be calculated by taking `number % 2`
@@ -160,6 +168,10 @@ Example where `n == 5`:
     - `answer[2 >> 1] + 2 % 2 = 1`
 6. `number = 5`: answer equals that of `2` (`5 >> 1 = 2`), and adds `1` since it's odd
     - `answer[5 >> 1] + 5 % 2 = 2`
+
+Complexity:
+- Time: `O(n)`
+- Space: `O(1)`
 
 ## Results (Python 3)
 
