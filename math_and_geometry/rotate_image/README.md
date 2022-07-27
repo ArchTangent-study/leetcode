@@ -15,6 +15,10 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Even vs odd `m,n` values
+
+Thoughts:
+- Can use similar approach as when rotating a point around a pivot
 
 ## Procedure
 
