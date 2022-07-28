@@ -9,11 +9,7 @@ class Solution:
         L, R = 0, len(matrix[0])
         T, B = 0, len(matrix)
 
-        while True:
-            # 1st exit point
-            if L >= R or T >= B:
-                break
-
+        while L < R and T < B:
             # Right pass (top row)
             for col in range(L, R):
                 answer.append(matrix[T][col])
@@ -25,8 +21,8 @@ class Solution:
                 answer.append(matrix[row][R - 1])
             R -= 1
 
-            # 2nd exit point
-            if L >= R or T >= B:
+            # NOTE: check L < R and T < B for each horizonal and vertical pass pair
+            if not(L < R and T < B):
                 break
 
             # Left pass (bottom row)
@@ -42,3 +38,4 @@ class Solution:
             L += 1
 
         return answer
+        
