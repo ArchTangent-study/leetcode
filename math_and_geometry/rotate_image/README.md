@@ -15,12 +15,15 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
-- Even vs odd `m,n` values
+- Even vs odd `n` values
 - Rotating in place
 - Avoiding making a separate **2D** matrix
 
 Thoughts:
 - Can use similar approach as when rotating a point around a pivot
+
+Notes:
+- Apparently, **reverse and transpose** is highly-effective method to solve this.
 
 ## Procedure
 
@@ -36,11 +39,23 @@ Complexity:
 - Time: one pass to gather transpositions, another to apply them -> `O(2n)` -> `O(n)`
 - Space: store `list` of all transpositions to make -> `O(n)`
 
+Where `n` is the width and `height` of the `matrix`
+
 Thoughts:
 - this had better space performance than expected (75%), especially since a separate list was used.
+
+### Method 2: Outside-in Ring Rotation w/Tuple Unpacking
+
+Key Idea: for a matrix of width `n`, rotate the first `n-1` values of the outer "ring" in groups of `4` using tuple unpacking
+
+Complexity:
+- Time: `O(n²)`
+- Space: `4` tuples to unpack for each rotation -> `O(1)`
+
+Where `n` is the width and `height` of the `matrix`
 
 ## Results (Python 3)
 
 **Method 1**: 47 ms, 13.8 MB (68.66%, 74.54%)
 
-**Method 2**:   ms,  MB (%, %)
+**Method 2**: 68 ms, 14 MB (20.26 %, 30.03%)
