@@ -42,11 +42,35 @@ Big Picture:
     - and sets each `(row,col)` value in `matrix` to `0`
 
 Complexity:
-- Time: Two passes -> `O(2n)` -> `O(n)`
+- Time: Two passes -> `O(2(m * n))` -> `O(m * n)`
 - Space: `O(m + n)`
 
 Thoughts: this was ***incredibly*** fast despite not being optimally space efficient.
 
+### Method 2: Two-Pass Delayed Zeroization with Row/Col Set
+
+Key Ideas:
+- Works like *Method 1*, but uses a `list` instead of a `set`.  Transitions nicely into the follow-up approach (*Method 3*).
+- Can also use `bool` values instead of `1`s or `0`s.  Can be more space efficient in some languages.
+
+Complexity:
+- Time: Three passes (inc. one to initialize lists) -> `O(3(m * n))` -> `O(m * n)`
+- Space: `O(m + n)`
+
+### Method 3: Two-Pass In-Place Zeroization (Follow-Up)
+
+Key Idea: build upon *Method 2* by using the *first row* and *first column* in the same capacity as the separate `list`s used in *Method 2*.  To account for the overlapping of the `0`th values in `row 0` and `col 0`, use a separate `bool` to represent `row 0` called `row_0_zeroized`.
+
+Complexity:
+- Time: Two passes -> `O(2(m * n))` -> `O(m * n)`
+- Space: `O(1)`
+
+*Caveat*: need to zeroized `row 0` (via `row_0_zeroize` `bool`) *after* zeroizing each `col`. Otherwise, the newly-zeroized `row 0` values will "contaminate" the coluumn computation.
+
 ## Results (Python 3)
 
 **Method 1**:  119 ms, 14.7 MB (**99.78%**, **90.66%**)
+
+**Method 2**:  144 ms, 14.8 MB (84.01%, 53.16%)
+
+**Method 3**:  171 ms, 14.9 MB (54.1%, 17.4%)
