@@ -1,3 +1,6 @@
+# NOTE: this failed on TLE for x=0.00001, n=2147483647
+# - issue: calls owHelper twice instead of storing result of one call and squaring it
+
 class Solution:
     def myPow(self, x: float, n: int) -> float:
         """Divide and Conquer Approach w/Recursion"""
@@ -19,10 +22,7 @@ class Solution:
             new_n = power // 2
             rem_n = power % 2
 
-            # Subproblems for exponent and any odd remainder
-            subanswer = powHelper(new_n)
-            remainder = x if rem_n == 1 else 1
-            return subanswer * subanswer * remainder
+            return powHelper(new_n) * powHelper(new_n) * powHelper(rem_n)
 
         answer = powHelper(exponent)
 

@@ -13,10 +13,29 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- divide by zero (`0.0 ** -3`)
+- very large exponents (allowed up to `2³¹-1`)
+- Negative numbers
+- Floating point accuracy
+
+Thoughts:
+- since large exponents are allowed, limiting factor will probably be ***time complexity***.
+- look for special cases where calculation can be sped up, e.g. powers of `2`
+- since function takes `float` input, there's likely a trick using the components of floating-point numbers (`sign`, `exponent`, `significand`)
 
 ## Procedure
 
-### Method 1
+### Method 1: Divide and Conquer w/Recursion
+
+Key Idea: break up the power calculation into **two parts**, accounting for odd exponents.  Once the calculation is completed, account for negative exponents by inverting the result.
+
+Complexity:
+- Time: repeatedly cut solution in half -> `O(log n)`
+- Space:  recursive depth is base 2 log  of exponent (`log₂n`)  -> `O(log n)`
+
+### Failed Method: Divide and Conquer w/Recursion
+
+Saved as it provides a useful lesson.  It *attempted* to use the Divide and Conquer method, but failed on TLE because it *didn't actually divide* the problem.  Take a look at the `pow(x,n)_slow.py` file to see why.
 
 ## Results (Python 3)
 
