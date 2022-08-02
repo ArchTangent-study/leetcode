@@ -18,15 +18,30 @@ Constraints:
 - `point.length == 2`
 - `0 <= x, y <= 1000`
 - At most `3000` calls in total will be made to `add` and `count`.
+- Each square requires a **positive area**
+- Getting the *number of ways* a square can be formed
 
 ## Thought Process
 
+Questions:
+- Will any points be removed?
+
 Edge Cases / Caveats / Pitfalls:
+- Duplicate points are allowed - account for them
 
 ## Procedure
 
 ### Method 1
 
+*Note*: *read the requirements!*  It's clearly stated that a **positive area** is required.  Not accounting for this will result in errors.
+
+Complexity:
+- Add: `O(1)`
+- Count: for each coaxial `x`, count pairs of matching `y` -> `O(4n)`
+- Space: `O(n)`
+
+Thoughts: based on the low runtime score (`5%`), there's certainly a faster approach to the `count()` method.
+
 ## Results (Python 3)
 
-**Method 1**:   ms,  MB (%, %)
+**Method 1**:   ms,  MB (5.02%, 59.07%)
