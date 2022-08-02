@@ -31,17 +31,28 @@ Edge Cases / Caveats / Pitfalls:
 
 ## Procedure
 
-### Method 1
+### Method 1: Paired Coaxial Values with Dict
 
 *Note*: *read the requirements!*  It's clearly stated that a **positive area** is required.  Not accounting for this will result in errors.
 
 Complexity:
 - Add: `O(1)`
-- Count: for each coaxial `x`, count pairs of matching `y` -> `O(4n)`
+- Count: for each coaxial `x`, count pairs of matching `y` -> `O(4n²)` -> `O(n²)`
 - Space: `O(n)`
 
 Thoughts: based on the low runtime score (`5%`), there's certainly a faster approach to the `count()` method.
 
+### Method 2: Paired Coaxial Values with Dict and Tuple Counter
+
+Key Idea: improve speed and sacrifice space by adding a separate `(x,y)` point counter.
+
+Complexity:
+- Add: `O(1)`
+- Count: directly get count of each needed `(x,y)` pair-> `O(4n)` -> `O(n)`
+- Space: two dictionaries -> `O(2n)`-> `O(n)`
+
 ## Results (Python 3)
 
-**Method 1**:   ms,  MB (5.02%, 59.07%)
+**Method 1**: 2338 ms, 15.9 MB (5.02%, 59.07%)
+
+**Method 2**: 748 ms, 16.2 MB (26.97%, 16.79%)
