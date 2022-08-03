@@ -13,6 +13,8 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Leading zeroes when reversing
+- Numbers outside of signed 32-bit integer range
 
 ## Procedure
 
