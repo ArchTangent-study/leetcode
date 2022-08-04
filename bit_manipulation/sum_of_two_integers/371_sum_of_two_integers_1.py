@@ -1,6 +1,6 @@
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        """Bitwise Addition w/Carry and Bitmask, Subtraction w/XOR"""
+        """Bitwise Addition and Subtraction w/Carry and Bitmask"""
 
         def bitAdd(n1: int, n2: int) -> int: 
             """Iterate over bits (up to 10 with max number of 1,000) and add w/carry"""

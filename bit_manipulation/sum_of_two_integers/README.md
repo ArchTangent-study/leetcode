@@ -14,6 +14,7 @@ Edge Cases / Caveats / Pitfalls:
 - Negative numbers (subtraction)
 - Carry on final bit checked
 - Sign
+- Bit operations with Python
 
 ## Procedure
 
@@ -23,6 +24,32 @@ Edge Cases / Caveats / Pitfalls:
 
 *Note* this approach was fraught with edge cases and headaches.  Surely there's a better way!
 
+Visualization
+|   `A`   |   `B`  |  Answer                                                   |
+|---------|--------|-----------------------------------------------------------|
+|   `0`   |  any   | `B`                                                       |
+|   any   |   `0`  | `A`                                                       |
+|  `> 0`  |  `>0`  | `abs(A) + abs(B)`                                         |
+|  `< 0`  |  `<0`  | `-(abs(A) + abs(B))`                                      |
+|  `> 0`  |  `<0`  | `abs(A) + abs(B)` with sign based on `abs(A)` vs `abs(B)` |
+|  `< 0`  |  `>0`  | `abs(A) + abs(B)` with sign based on `abs(A)` vs `abs(B)` |
+
+Complexity:
+- Time: add or subtract 10 bits max, plus carry (highest magnitude = 1,000) -> `O(1)`
+- Space: `O(1)`
+
+### Method 2: BiXOR Sum, BitAND Carry
+
+Turns out, there was a better way, but it's very hard to do in Python without some hassle.  So for this, I chose my second language, *Rust*, for the implementation.
+
+Complexity:
+- Time: `O(1)`
+- Space: `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**:  44 ms, 14.0 MB (58.01%, 14.41%)
+
+## Results (Rust)
+
+**Method 2**:  1 ms, 2.3 MB (68.09%, 8.51%)
