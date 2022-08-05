@@ -38,7 +38,7 @@ Complexity:
 - Time: add or subtract 10 bits max, plus carry (highest magnitude = 1,000) -> `O(1)`
 - Space: `O(1)`
 
-### Method 2: BiXOR Sum, BitAND Carry
+### Method 2: BiXOR Sum, BitAND Carry (Rust)
 
 Turns out, there was a better way, but it's very hard to do in Python without some hassle.  So for this, I chose my second language, *Rust*, for the implementation.
 
