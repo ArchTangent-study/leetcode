@@ -16,11 +16,22 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- efficient distance calculation
 
 ## Procedure
 
-### Method 1
+### Method 1: Min Heap with Absolute Distance
+
+Big Picture:
+1. Absolute distance is `x*x + y*y` ; no need for `sqrt()`
+2. Store *min heap* of `[abs_dist, x, y]` triplets
+3. Extract the top `k` `[x, y]` values from the `heap` and add to `answer`
+4. Return `answer`
+
+Complexity:
+- Time: heap insertion for all `n` items in input -> `O(n log n)`
+- Space: store up to `n` items from input in `heap` -> `O(n)`
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 1104 ms, 20.5 MB (64.41%, 38.27%)

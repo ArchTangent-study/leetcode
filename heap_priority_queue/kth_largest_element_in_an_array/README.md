@@ -14,6 +14,8 @@ Constraints:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- Duplicate numbers (don't need `kth` largest *distinct* element)
+- Time complexity constraint of `O(n)`
 
 ## Procedure
 
