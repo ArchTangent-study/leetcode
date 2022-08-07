@@ -19,7 +19,9 @@ Edge Cases / Caveats / Pitfalls:
 
 Approaches:
 - Min Heap: will fail due to `O(n log n)` complexity being above requirements
-- Quickselect: the [Quickselect](https://en.wikipedia.org/wiki/Quickselect) algorithm will also fail, as its worst-case complexity is `O(n²)`
+
+Thoughts:
+- Considering how slow both accepted methods were, perhaps there's a better way?
 
 ## Procedure
 
@@ -30,6 +32,14 @@ Key Idea: take advantage of limited number range (`-10000 to +10000`) to count e
 Complexity:
 - Time: `O(n)`
 - Space: `O(1)`
+
+### Method 2: Quickselect
+
+Key Idea: the worst case time complexity is `O(n²)`, but this can be mitigated by choosing a random pivot in the middle (e.g. `len(numbers) // 2`).
+
+Complexity:
+- Time: `O(n²)`, but `O(n)` average case with middle-index pivot (rather zero index)
+- Space: `O(n)`
 
 ### Failed Method: Monotonically-Decreasing Stack using Deque of Length K
 
@@ -42,3 +52,5 @@ Complexity:
 ## Results (Python 3)
 
 **Method 1**: 952 ms, 24.5 MB (17.99%, 21.58%)
+
+**Method 2**: 699 ms, 27.4 MB (25.32%, 9.09%)
