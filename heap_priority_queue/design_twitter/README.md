@@ -25,6 +25,7 @@ Questions:
 - Do the `tweetId` values increase with time, e.g. tweet `5` is posted later than `1`?
 - Do users follow themselves automatically?
 - Can you unfollow yourself? -> NO (as per test cases)
+- Are `tweetIds` serialized starting from `0`? -> NO
 
 Edge Cases / Caveats / Pitfalls:
 - Determining `10` most recent tweets
