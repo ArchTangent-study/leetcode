@@ -41,8 +41,29 @@ Key Idea: convert the unnecessary `waiting` *heap* to a *queue*.
 - Don't need sorting in the `waiting` list; just need to get values that are ready *at all*
 - Improves add/remove time complexity for `waiting` from `O(log n)` to `O(1)`
 
+### Method 3: Greedy Heap and Queue (Ready and Waiting) with Timer
+
+*Note*: I tried this one out in Rust.
+
+Big Picture:
+1. Store one `count` `HashMap` for each `task`
+2. Store one `ready` `HashMap` for each `task`, holding the `timer` value at which the `task` will be ready
+3. Store at `total_count` for all `task`s to be performed
+4. Choose the `ready` task with the highest `count`, then decrement the `count`
+5. If no `task` is `ready`, stand idle
+6. Increment the `timer`
+7. If `total_count` is `0`, return `timer`
+
+Complexity:
+- Time: iterate over up to `26` tasks for `count` and `ready` status -> `O(52n)` -> `O(n)`
+- Space: up to `26` tasks (`"A-Z"`) dictionaries -> `O(1)`
+
 ## Results (Python 3)
 
 **Method 1**:  1417 ms, 14.3 MB (7.49%, 90.18%)
 
 **Method 2**:  867 ms, 14.3 MB (39.82%, 90.18%)
+
+## Results (Rust)
+
+**Method 3**:  110 ms, 2.80 MB (5.26%, 78.95%)
