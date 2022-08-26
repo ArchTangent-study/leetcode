@@ -31,8 +31,40 @@ Edge Cases / Caveats / Pitfalls:
 
 ## Procedure
 
-### Method 1
+### Method 1: Split Max/Min Heap
+
+Key Idea: split data into lower (max heap) and upper (min heap) heaps, and always keep their lengths within 1 of each other.
+
+Big Picture:
+1.) Create a `lower` max heap for lower half of data stream
+2.) Create an `upper` min heap for upper half of data stream
+3.) Track even/odd status with an `even` boolean
+4.) When adding a new number, add to `upper` if `number` is > lowest value in `upper`. Otherwise, add it to `lower`.
+6.) Always keep lengths of `lower` and `upper` within 1 of each other.
+    - if `len(lower) - len(upper) > 1`:  `heappop(lower)`, then `heappush` it onto `upper`
+    - if `len(upper) - len(lower) > 1`:  `heappop(upper)`, then `heappush` it onto `lower`
+        - be sure to account for *negative* values in a Python max heap
+7.) get median for `even` count:
+    - average highest of `lower` (max heap) with lowest of `upper` (min heap)
+8.) get median for `odd` count:
+    - if `len(lower) > len(upper)`, return highest value of `lower`
+    - if `len(upper) > len(lower)`, return lowest value of `upper`
+
+### Failed Method: Single Binary Heap with Pop and Replace
+
+This failed on "Time Limit Exceeded", but serves as a good foundation for improvement in *Method 1*.  See `_slow.py` file.
+
+Big Picture:
+1. track `even/odd` status of the `heap`
+2. add new numbers with `heappush()`
+3. get median for `even` `heap` by:
+    - adding the first `len(nums) / 2 + 1` numbers to a `temp` list
+    - averaging the the top two values in `temp`
+4. get median for `odd` `heap` by:
+    - adding the first `len(nums) / 2 + 1` numbers to a `temp` list
+    - taking the last (highest) value in `temp`
+  - return all values from temp back to the heap
 
 ## Results (Python 3)
 
-**Method 1**:  ms, MB (%, %)
+**Method 1**: 664 ms, 33.5 MB (77.47%, **92.86%**)
