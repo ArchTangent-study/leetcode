@@ -50,6 +50,10 @@ Big Picture:
     - if `len(lower) > len(upper)`, return highest value of `lower`
     - if `len(upper) > len(lower)`, return lowest value of `upper`
 
+Complexity:
+- Time: `O()`
+- Space: `O()`
+
 ### Failed Method: Single Binary Heap with Pop and Replace
 
 This failed on "Time Limit Exceeded", but serves as a good foundation for improvement in *Method 1*.  See `_slow.py` file.
