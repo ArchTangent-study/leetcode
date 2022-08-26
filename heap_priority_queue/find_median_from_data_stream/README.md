@@ -24,6 +24,10 @@ Follow up:
 ## Thought Process
 
 Edge Cases / Caveats / Pitfalls:
+- `get_median()` called on empty list -> N/A as per constraints
+- accounting for even/odd lists
+- maintaining sorted order of list with new numbers added
+- getting middle number(s) when using a heap
 
 ## Procedure
 
