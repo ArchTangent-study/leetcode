@@ -51,8 +51,13 @@ Big Picture:
     - if `len(upper) > len(lower)`, return lowest value of `upper`
 
 Complexity:
-- Time: `O()`
-- Space: `O()`
+- Add Num: heappush up to `n` values with a possible added heap pop and push -> `O(n log h)`
+- Find Median: constant time -> `O(1)`
+- Space: `O(n)`
+
+Where:
+- `n` is the amount of numbers added to the `MedianFinder`
+- `h` is the size of each `heap` (length of both will always be within 1 of each other)
 
 ### Failed Method: Single Binary Heap with Pop and Replace
 
